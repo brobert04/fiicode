@@ -43,7 +43,6 @@
                     <x-input-label for="role_id" value="{{ __('Register as: ') }}"></x-input-label>
                     <select name="role_id" id="role_id" class="block mt-1 w-full">
                         <option value="doctor">Doctor</option>
-                        <option value="patient">Patient</option>
                     </select>
         </div>
 

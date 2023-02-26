@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invitation;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -21,7 +22,7 @@ class PatientRegistration extends Controller
         $invitation_token = $request->get('invitation_token');
         $invitation = Invitation::where('invitation_token', $invitation_token)->firstOrFail();
         $email = $invitation->email;
-        return view('auth.register2', compact('email'));
+        return view('auth.register2', compact('email', 'invitation_token'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -38,6 +39,17 @@ class PatientRegistration extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role_id
         ]);
+
+        $token = $request->token;
+        $invitation = Invitation::where('invitation_token', $token)->firstOrFail();
+        $email = $invitation->doctor_email;
+
+        $userdoc = User::where('email', $email)->firstOrFail();
+        $doctor = $userdoc->doctor;
+        $patient = new Patient();
+        $patient->user_id = $user->id;
+        $patient->doctor_id = $doctor->id;
+        $patient->save();
 
         event(new Registered($user));
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth_custom.doctor.register');
     }
 
     /**
@@ -42,6 +43,18 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role_id
         ]);
+
+        $doctor = new Doctor();
+        $doctor->user_id = $user->id;
+        if ($request->file('documents')){
+            foreach($request->file('documents') as $file){
+                $name = $file->getClientOriginalName();
+                $file->move(public_path(). '/documents/'.str_replace(' ', '',$request->name) . '/' , $name);
+                $data[] = $name;
+            }
+            $doctor->documents = json_encode($data);
+        };
+        $doctor->save();
 
         event(new Registered($user));
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Patient;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -52,7 +53,22 @@ class User extends Authenticatable
         return $this->role === 'patient';
     }
 
-    
+    public function doctor(){
+        if ($this->role === 'doctor'){
+            return $this->hasOne(Doctor::class);
+        }
+        else{
+            return null;
+        }
+    }
 
+    public function patient(){
+        if ($this->role === 'patient'){
+            return $this->hasOne(Patient::class);
+        }
+        else{
+            return null;
+        }
+    }
 }
 

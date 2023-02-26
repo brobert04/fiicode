@@ -39,6 +39,9 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
+        <x-text-input id="token" class="block mt-1 w-full hidden"
+                            type="text"
+                            name="token" value="{{ $invitation_token }}" />
                 
         <div class="mt-4">
                     <x-input-label for="role_id" value="{{ __('Register as: ') }}"></x-input-label>
