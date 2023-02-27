@@ -1,75 +1,72 @@
 @section('title', 'Medicool | Doctor Register')
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-@include('auth-custom.partials.head')
+@include('auth_custom.partials.head')
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ route('index') }}"><b>Medi</b>Cool</a>
+        <a href=""><b>Medi</b>Cool</a>
     </div>
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">Register a new account</p>
+            <p class="login-box-msg">Register a new patient account</p>
 
-            <form action="{{ route('doctor.register.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('patient.register.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="input-group mb-3">
+                <input name="token" id="token" value="{{ $invitation_token }}" hidden>
+                <div class="form-group mb-3">
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" placeholder="Full name" name="name" id="name" required
-                           autofocus>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user"></span>
-                        </div>
-                    </div>
+                           autofocus value={{ old('name') }}>
+                    @error('name') <span class="text-danger small">{{$message}}</span>@enderror
                 </div>
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" value={{ $email }} disabled>
+                    <input type="email" class="form-control" placeholder="Email" name="email" id="email" required value={{ $email }} hidden>
+                    @error('email') <span class="text-danger small">{{$message}}</span>@enderror
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" id="password" name="password"
-                           required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                    @error('password') <span class="text-danger small">{{$message}}</span>@enderror
                 </div>
-                <div class="input-group mb-3">
+                <div class="form-group mb-3">
+                    <label for="password_confirmation">Password Confirmation</label>
                     <input type="password" class="form-control" placeholder="Retype password" id="password_confirmation"
                            name="password_confirmation" required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
+                    @error('password_confirmation') <span class="text-danger small">{{$message}}</span>@enderror
                 </div>
-                <div class="input-group mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile1"
-                               title="Upload your documents to prove you are a doctor." name='documents[]' multiple>
-                        <label class="custom-file-label" for="customFile1">Documents</label>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="role_id">Register as</label>
+                        <select class="form-control" disabled>
+                            <option value="patient" selected>Patient</option>
+                        </select>
+                        <select class="form-control" name="role_id" id="role_id" hidden>
+                            <option value="patient" selected>Patient</option>
+                        </select>
                 </div>
                 <div class="preview-image" id="preview-image">
                 </div>
                 <div class="row">
                     <!-- /.col -->
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <div class="row" style="align-items: baseline;">
+                            <div class="col-6">
+                                <a href="{{ route('login') }}" class="text-center" style="text-align: center">Already registered?</a>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
-            <a href="{{ route('login') }}" class="text-center mt-3">I already have an account</a>
         </div>
         <!-- /.form-box -->
-    </div><!-- /.card -->
+    </div>
 </div>
 <!-- /.register-box -->
 @include('auth_custom.partials.scripts')

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreInvitationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PatientRegister;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Mail;
 
 class DoctorController extends Controller
@@ -33,7 +34,12 @@ class DoctorController extends Controller
         $link = urldecode(route('patient.register') . '?invitation_token=' .$invitation->invitation_token);
 
         Mail::to($invitation->email)->send(new PatientRegister($link));
-
         return redirect()->route('doctor.send-invite')->with('success', 'Invitation sent successfully');
+    }
+
+
+    public function patients(){
+        $patients = Auth::user()->doctor->patients;
+        return view('doctor.pages.all_patients', compact('patients'));
     }
 }

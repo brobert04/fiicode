@@ -5,6 +5,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('../assets/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('../assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<script src="{{ asset('../assets/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
 <script>
     $(function () {
       bsCustomFileInput.init();
@@ -36,4 +37,10 @@
         if (!ev.target.files) return; // Do nothing.
         [...ev.target.files].forEach(preview);
     });
+
 </script>
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    window.stepper = new Stepper(document.querySelector('.bs-stepper'))});
+
+</script> --}}

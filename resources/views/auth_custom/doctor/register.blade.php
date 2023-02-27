@@ -46,8 +46,9 @@
                     <label for="role_id">Documents</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile1"
-                               title="Upload your documents to prove you are a doctor." name='documents[]' multiple>
+                               title="Upload your documents to prove you are a doctor." name='documents[]' multiple required>
                         <label class="custom-file-label" for="customFile1">Upload</label>
+                        @error('documents[]') <span class="text-danger small">{{$message}}</span>@enderror
                     </div>
                 </div>
                 <div class="preview-image" id="preview-image">

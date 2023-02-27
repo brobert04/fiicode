@@ -25,7 +25,7 @@
         </form>
     </div>
     @if(!empty($invitations))
-        <div class="card card-primary">
+        <div class="card card-dark">
             <div class="card-header">
                 <h3 class="card-title">Invites Sent</h3>
             </div>
@@ -35,11 +35,19 @@
                     <tr style="text-align: center;">
                         <th>Email</th>
                         <th>Created At</th>
+                        <th>Status</th>
                     </tr>
                     @foreach($invitations as $invitation)
                     <tr style="text-align: center;">
                         <td>{{$invitation->email}}</td>
                         <td>{{$invitation->created_at}}</td>
+                        @if($invitation->status === 1){
+                            <td><span class="badge bg-success">Accepted</span></td>
+                        }
+                        @else{
+                            <td><span class="badge bg-warning">Pending</span></td>
+                        }
+                        @endif
                     </tr>
                     @endforeach
                 </table>

@@ -22,7 +22,7 @@ class PatientRegistration extends Controller
         $invitation_token = $request->get('invitation_token');
         $invitation = Invitation::where('invitation_token', $invitation_token)->firstOrFail();
         $email = $invitation->email;
-        return view('auth.register2', compact('email', 'invitation_token'));
+        return view('auth_custom.patient.register', compact('email', 'invitation_token'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -50,6 +50,9 @@ class PatientRegistration extends Controller
         $patient->user_id = $user->id;
         $patient->doctor_id = $doctor->id;
         $patient->save();
+
+        $invitation->status = 1;
+        $invitation->save();
 
         event(new Registered($user));
 

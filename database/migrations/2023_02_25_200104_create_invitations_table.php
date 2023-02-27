@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('invitation_token', 32)->unique()->nullable();
             $table->timestamp('registered_at')->nullable();
             $table->string('doctor_email');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

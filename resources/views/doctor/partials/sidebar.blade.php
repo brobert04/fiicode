@@ -25,6 +25,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('doctor.patients')}}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                  All Patients
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

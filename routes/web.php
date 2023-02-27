@@ -39,6 +39,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
 
     Route::get('/send-invite', [DoctorController::class, 'sendInvite'])->name('doctor.send-invite');
     Route::post('/send-invite', [DoctorController::class, 'sendInviteStore'])->name('doctor.send-invite.store');
+
+    Route::get('/patients', [DoctorController::class, 'patients'])->name('doctor.patients');
 });
 
 

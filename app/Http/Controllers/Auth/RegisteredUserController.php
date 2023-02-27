@@ -35,6 +35,8 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'documents' => 'required',
+            'documents.*' => 'mimes:pdf,doc,docx,jpeg,png,jpg,gif,svg'
         ]);
 
         $user = User::create([
