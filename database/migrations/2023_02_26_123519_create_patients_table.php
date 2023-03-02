@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('doctor_id')->constrained('doctors')->onUpdate('cascade')->onDelete('cascade');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('blood_type')->nullable();
-            $table->string('allergies')->nullable();
+            $table->string('bod')->nullable();
+            $table->string('gender')->nullable();
             $table->timestamps();
         });
     }

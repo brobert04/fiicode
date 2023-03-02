@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreInvitationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PatientRegister;
+use App\Models\HealthFile;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Mail;
 
@@ -37,9 +38,14 @@ class DoctorController extends Controller
         return redirect()->route('doctor.send-invite')->with('success', 'Invitation sent successfully');
     }
 
-
     public function patients(){
         $patients = Auth::user()->doctor->patients;
         return view('doctor.pages.all_patients', compact('patients'));
     }
-}
+
+    public function healthFileAdd($id){
+        $health = HealthFile::where('patient_id', $id)->firstOrFail();
+        $patient = Patient::where('id', $id)->firstOrFail();
+        return view('doctor.pages.health_page', compact('health', 'patient'));
+    }
+}   

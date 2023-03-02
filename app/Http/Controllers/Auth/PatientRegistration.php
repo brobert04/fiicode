@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\HealthFile;
 use App\Models\Invitation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -51,6 +52,9 @@ class PatientRegistration extends Controller
         $patient->doctor_id = $doctor->id;
         $patient->save();
 
+        $healthFile = new HealthFile();
+        $healthFile->patient_id = $patient->id;
+        $healthFile->save();
         $invitation->status = 1;
         $invitation->save();
 

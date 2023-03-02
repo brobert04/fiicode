@@ -1,5 +1,8 @@
 @extends('doctor.template')
 @section('title', 'Medicool | Send Patient Invitation')
+@section('custom-css')
+    <link rel="stylesheet" href="{{ asset('../assets/plugins/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
     <div class="card card-dark">
         <div class="card-header">
@@ -15,6 +18,7 @@
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                        @error('email') <span class="text-danger small">{{$message}}</span>@enderror
                     </div>
                 </div>
             </div>
@@ -54,4 +58,27 @@
             </div>
         </div>
     @endif
+@endsection
+@section('custom-js')
+<script src="{{ asset('../assets/plugins/toastr/toastr.min.js') }}"></script>
+<script>
+    @if(session()->has('success'))
+        $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'Patient management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('success') }}'
+        })
+    @endif
+        @if(session()->has('error'))
+        $(document).Toasts('create', {
+                    class: 'bg-danger',
+                    title: 'Patient management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('error') }}'
+        })
+        @endif
+</script>
 @endsection

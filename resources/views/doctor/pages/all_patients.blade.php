@@ -14,10 +14,7 @@
           <th>Email</th>
           <th>Phone</th>
           <th>Address</th>
-          <th>Blood Type</th>
-          <th>Allergies</th>
-          <th>Height</th>
-          <th>Weight</th>
+          <th>Birth Date</th>
           <th>Photo</th>
           <th>Actions</th>
         </tr>
@@ -29,25 +26,20 @@
           <td>{{ $patient->user->email }}</td>
           <td>{{ $patient->phone }}</td>
           <td>{{ $patient->address }}</td>
-          <td>{{ $patient->blood_type }}</td>
-          <td>{{ $patient->allergies }}</td>
-          <td> 4</td>
-          <td>X</td>
+          <td>{{ $patient->bod }}</td>
           <td>
             <img src="https://ui-avatars.com/api/?name={{ $patient->user->name }}&background=random&size=128" alt="{{ $patient->user->name }} Avatar" class="img-size-50 mr-3">
           </td>
-          <td>
-            <div class="row">
-                    <button class="btn btn-primary mr-3">
-                        <a class="text-white" href=#><i class="fas fa-eye"></i></a>
-                    </button>
-                    <button class="btn btn-success mr-3">
-                        <a class="text-white" href=#><i class="fas fa-edit"></i></a>
-                    </button>
-                    <button class="btn btn-danger">
-                        <a class="text-white" href=#><i class="fas fa-trash"></i></a>
-                    </button>
-            </div>
+          <td class="text-center">
+            <a href="" class="btn btn-primary text-white">
+              <i class="fas fa-eye"></i>
+            </a>
+            <a href="{{ route('doctor.health-file', $patient->id) }}" class="btn btn-success text-white">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a href="" class="btn btn-danger text-white">
+              <i class="fas fa-trash"></i>
+            </a>
           </td>
           @endforeach
         </tr>
