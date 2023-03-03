@@ -43,6 +43,10 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::get('/patients', [DoctorController::class, 'patients'])->name('doctor.patients');
 
     Route::get('/health-file/{id}', [DoctorController::class, 'healthFileAdd'])->name('doctor.health-file');
+
+    Route::post('/health-file/{id}', [DoctorController::class, 'healthFileStore'])->name('doctor.health-file.store');
+
+    Route::get('/health-file/pdf/{id}', [DoctorController::class, 'healthFileShow'])->name('doctor.health-file.pdf');
 });
 
 

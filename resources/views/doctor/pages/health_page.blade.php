@@ -9,7 +9,8 @@
     <h3 class="card-title">Health File - {{ $patient->user-> name }} | Date: {{ now()->format('F j, Y') }}</h3>
   </div>
   <div class="card-body">
-    <form>
+    <form action={{ route('doctor.health-file.store', $patient->id ) }} method="post">
+      @csrf
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
@@ -44,11 +45,15 @@
           <div class="form-group">
             <label for="date">Control Date</label>
             <div class="input-group date" id="date" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" data-target="#date"/>
+              <input type="text" class="form-control datetimepicker-input  @error('date') is-invalid @enderror" data-target="#date" name="date" id="date"  required/>
               <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
+             
           </div>
+          @error('date')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
           </div>
         </div>
       </div>
@@ -56,34 +61,49 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="height">Height (cm's)</label>
-           <input type="number" name="height" id="height" class="form-control" min="130">
+           <input type="number" name="height" id="height" class="form-control @error('height') is-invalid @enderror" min="130" required>
+           @error('height')
+           <span class="text-danger">{{$message}}</span>
+           @enderror
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label for="weight">Weight (kg's)</label>
-           <input type="number" name="weight" id="weight" class="form-control">
+           <input type="number" name="weight" id="weight" class="form-control @error('weight') is-invalid @enderror" required>
+           @error('weight')
+           <span class="text-danger">{{$message}}</span>
+           @enderror
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label for="blood">Blood Group</label>
-            <input type="text" name="blood" id="blood" class="form-control">
+            <input type="text" name="blood" id="blood" class="form-control @error('blood') is-invalid @enderror" required>
+            @error('blood')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
         </div>
       </div>
       <div class="form-group">
         <label for="reason">Reason for seeing this doctor + Symptoms</label>
-        <textarea class="form-control" id="reason" placeholder="Enter here" name="reason"></textarea>
+        <textarea class="form-control @error('reason') is-invalid @enderror" id="reason" placeholder="Enter here" name="reason" required></textarea>
+         @error('reason')
+          <span class="text-danger">{{$message}}</span>
+        @enderror
       </div>
       <h4 class="font-weight-bold">Medical History</h4>
       <div class="form-group">
         <label for="allergies">Allergies</label>
-        <textarea class="form-control" id="allergies" placeholder="Enter here" name="allergies"></textarea>
+        <textarea class="form-control @error('allergies') is-invalid @enderror" id="allergies" placeholder="Enter here" name="allergies" required></textarea>
+        @error('allergies')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
       </div>
       <div class="form-group">
         <label>Have you ever had (Choose all that apply):</label>
-        <select multiple class="form-control" id="conditions" name="conditions">
+        <select multiple="" class="form-control" id="conditions" name="conditions[]">
           <option>Anemia</option>
           <option>Asthma</option>
           <option>Arthritis</option>
@@ -110,56 +130,74 @@
         </select>
       </div> 
       <div class="form-group">
-        <label for="exampleInputEmail1">PLease list any operations</label>
-        <textarea class="form-control" id="exampleInputEmail1" placeholder="Enter here"></textarea>
+        <label for="operations">Please list any operations</label>
+        <textarea class="form-control @error('operations') is-invalid @enderror" id="operations" name="operations" placeholder="Enter here" required></textarea>
+        @error('operations')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">PLease list your current medications</label>
-        <textarea class="form-control" id="exampleInputEmail1" placeholder="Enter here"></textarea>
+        <label for="medications">Please list your current medications</label>
+        <textarea class="form-control @error('medications') is-invalid @enderror" id="medications" name="medications" placeholder="Enter here" required></textarea>
+        @error('medications')
+        <span class="text-danger">{{$message}}</span>
+        @enderror
       </div>
       <h4 class="font-weight-bold">Habits</h4>
       <div class="row">
         <div class="col-md-3">
           <div class="form-group">
             <label>Exercise</label>
-            <select class="form-control">
+            <select class="form-control @error('exercise') is-invalid @enderror" name="exercise" id="exercise">
               <option>Never</option>
               <option>1-2 days</option>
               <option>3-4 days</option>
               <option>5+ days</option>
             </select>
+            @error('exercise')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <label>Following a diet</label>
-            <select class="form-control">
+            <select class="form-control @error('diet') is-invalid @enderror" name="diet" id="diet">
               <option>Loose diet</option>
               <option>Strict diet</option>
               <option>No diet plan</option>
             </select>
+            @error('diet')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <label>Alcohol Consumption</label>
-            <select class="form-control">
+            <select class="form-control @error('alcohol') is-invalid @enderror" id="alcohol" name="alcohol">
               <option>Doesn't drink</option>
               <option>1-2 glasses/day</option>
               <option>3-4 glasses/day</option>
               <option>5+ glasses/day</option>
             </select>
+            @error('alcohol')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <label>Caffeine Consumption</label>
-            <select class="form-control">
+            <select class="form-control @error('caffeine') is-invalid @enderror" id="caffeine" name="caffeine">
               <option>No caffeine</option>
               <option>1-2 cups/day</option>
               <option>3-4 cups/day</option>
               <option>5+ cups/day</option>
             </select>
+            @error('caffeine')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
           </div>
         </div>
       </div>
@@ -178,7 +216,7 @@
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
   })
   $('#date').datetimepicker({
-        format: 'L'
+        format: 'YYYY-MM-DD'
     });
 </script>
 @endsection

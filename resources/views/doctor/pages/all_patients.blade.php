@@ -20,8 +20,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
         @foreach ($patients as $patient )
+        <tr>
           <td>{{ $patient->user->name }}</td>
           <td>{{ $patient->user->email }}</td>
           <td>{{ $patient->phone }}</td>
@@ -31,11 +31,11 @@
             <img src="https://ui-avatars.com/api/?name={{ $patient->user->name }}&background=random&size=128" alt="{{ $patient->user->name }} Avatar" class="img-size-50 mr-3">
           </td>
           <td class="text-center">
-            <a href="" class="btn btn-primary text-white">
+            <a href="{{ route('doctor.health-file.pdf', $patient->id) }}" class="btn btn-primary text-white" title="See latest health-file">
               <i class="fas fa-eye"></i>
             </a>
-            <a href="{{ route('doctor.health-file', $patient->id) }}" class="btn btn-success text-white">
-              <i class="fas fa-edit"></i>
+            <a href="{{ route('doctor.health-file', $patient->id) }}" class="btn btn-success text-white" title="Create new health file">
+              <i class="fas fa-plus"></i>
             </a>
             <a href="" class="btn btn-danger text-white">
               <i class="fas fa-trash"></i>

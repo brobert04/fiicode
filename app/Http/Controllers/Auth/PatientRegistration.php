@@ -52,9 +52,9 @@ class PatientRegistration extends Controller
         $patient->doctor_id = $doctor->id;
         $patient->save();
 
-        $healthFile = new HealthFile();
-        $healthFile->patient_id = $patient->id;
-        $healthFile->save();
+        // $healthFile = new HealthFile();
+        // $healthFile->patient_id = $patient->id;
+        // $healthFile->save();
         $invitation->status = 1;
         $invitation->save();
 

@@ -18,6 +18,6 @@ class Patient extends Model
     }
 
     public function healthFile(){
-        return $this->hasOne(HealthFile::class);
+        return $this->hasMany(HealthFile::class);
     }
 }
