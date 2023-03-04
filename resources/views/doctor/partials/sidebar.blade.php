@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('doctor.patients')}}" class="nav-link">
+            <a href="{{route('doctor.transfer.patients.index')}}" class="nav-link">
               <i class="nav-icon fas fa-arrow-right"></i>
               <p>
                   Transfer Patients

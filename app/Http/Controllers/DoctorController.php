@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreInvitationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PatientRegister;
+use App\Models\Doctor;
 use App\Models\HealthFile;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Mail;
@@ -112,5 +113,11 @@ class DoctorController extends Controller
         $patient = Patient::where('id', $id)->firstOrFail();
         $patient->user->delete();
         return redirect()->route('doctor.patients')->with('success', 'Patient deleted successfully');
+    }
+
+    public function transferPatientsIndex(){
+        $patients = Auth::user()->doctor->patients;
+        $doctors = Doctor::all();
+        return view('doctor.pages.transfer_patients', compact('patients', 'doctors'));
     }
 }   

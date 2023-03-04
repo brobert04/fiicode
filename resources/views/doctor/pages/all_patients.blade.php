@@ -62,8 +62,28 @@
     $(function () {
       $("#patients").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#patients_wrapper .col-md-6:eq(0)');
     });
   </script>
+  <script>
+    @if(session()->has('success'))
+        $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'Patient management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('success') }}'
+        })
+    @endif
+        @if(session()->has('error'))
+        $(document).Toasts('create', {
+                    class: 'bg-danger',
+                    title: 'Patient management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('error') }}'
+        })
+        @endif
+</script>
 @endsection
