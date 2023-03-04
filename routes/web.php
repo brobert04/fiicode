@@ -18,8 +18,8 @@ use App\Http\Controllers\Auth\PatientRegistration;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.pages.index');
+})->name('index');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -47,6 +47,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::post('/health-file/{id}', [DoctorController::class, 'healthFileStore'])->name('doctor.health-file.store');
 
     Route::get('/health-file/pdf/{id}', [DoctorController::class, 'healthFileShow'])->name('doctor.health-file.pdf');
+
+    Route::get('/health-file/edit/{date}', [DoctorController::class, 'profileHealthPage'])->name('doctor.health-file.profile');
 });
 
 

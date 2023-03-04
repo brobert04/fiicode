@@ -30,7 +30,7 @@
 <table class="customers">
     <tr>
         <td style="width: 25%">
-            Logo
+            {{-- <img src="{{ asset('../assets/img/logo.png') }}" width="50px" height="50px"> --}}
         </td>
         <td style="font-size:40px; font-weight: bold;padding:20px;color:blue; text-align: center; width: 50%">
             Medicool
@@ -74,7 +74,7 @@
 <br>
 <table class="customers">
     <tr>
-        <th colspan="2" style="text-align: center">Medical Report</th>
+        <th colspan="2" style="text-align: center; font-size: 20px">Medical Report</th>
     </tr>
     <tr>
        <td style="font-weight: bold;">
@@ -129,7 +129,23 @@
          Diet
         </td>
         <td style="text-align: right">
-         {{ $details['health']['diet style="text-align: right"'] }}
+         {{ $details['health']['diet'] }}
+        </td>
+     </tr>
+     <tr>
+        <td style="font-weight: bold;">
+         Alcohol Consumption
+        </td>
+        <td style="text-align: right">
+         {{ $details['health']['alcohol'] }}
+        </td>
+     </tr>
+     <tr>
+        <td style="font-weight: bold;">
+        Caffeine Consumption
+        </td>
+        <td style="text-align: right">
+         {{ $details['health']['caffeine'] }}
         </td>
      </tr>
 </table>

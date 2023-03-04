@@ -22,7 +22,8 @@
         <tbody>
         @foreach ($patients as $patient )
         <tr>
-          <td>{{ $patient->user->name }}</td>
+          <td>
+            <a href="{{ route('doctor.patients', ['patient' => $patient->id]) }}">{{ $patient->user->name }}</a></td>
           <td>{{ $patient->user->email }}</td>
           <td>{{ $patient->phone }}</td>
           <td>{{ $patient->address }}</td>
@@ -31,7 +32,7 @@
             <img src="https://ui-avatars.com/api/?name={{ $patient->user->name }}&background=random&size=128" alt="{{ $patient->user->name }} Avatar" class="img-size-50 mr-3">
           </td>
           <td class="text-center">
-            <a href="{{ route('doctor.health-file.pdf', $patient->id) }}" class="btn btn-primary text-white" title="See latest health-file">
+            <a href="{{ route('doctor.health-file.pdf', $patient->id) }}" class="btn btn-primary text-white" title="See latest health-file" target="_blank">
               <i class="fas fa-eye"></i>
             </a>
             <a href="{{ route('doctor.health-file', $patient->id) }}" class="btn btn-success text-white" title="Create new health file">

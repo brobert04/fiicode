@@ -50,6 +50,10 @@ class PatientRegistration extends Controller
         $patient = new Patient();
         $patient->user_id = $user->id;
         $patient->doctor_id = $doctor->id;
+        $patient->phone = $request->phone;
+        $patient->address = $request->address;
+        $patient->bod = $request->date;
+        $patient->gender = $request->gender;
         $patient->save();
 
         // $healthFile = new HealthFile();

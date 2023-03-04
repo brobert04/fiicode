@@ -22,7 +22,7 @@ class DoctorController extends Controller
     }
 
     public function sendInvite(){
-        $invitations =  Invitation::where('doctor_email', Auth::user()->email)->get();
+        $invitations =  Invitation::where('doctor_email', Auth::user()->email)->get();   
         return view('doctor.pages.send_invitation', compact('invitations'));
     }
 
@@ -42,6 +42,11 @@ class DoctorController extends Controller
     }
 
     public function patients(){
+        if (request('patient')){
+            $patient = Patient::where('id', request('patient'))->firstOrFail();
+            $health = HealthFile::where('patient_id', request('patient'))->get();
+            return view('doctor.pages.patient_history')->with(['patient' => $patient, 'health' => $health]);
+        }
         $patients = Auth::user()->doctor->patients;
         return view('doctor.pages.all_patients', compact('patients'));
     }
@@ -78,6 +83,20 @@ class DoctorController extends Controller
         $patient = Patient::where('id', $id)->firstOrFail();
 
         // create an array with health and patient variables
+        $data['details'] = [
+            'health' => $health,
+            'patient' => $patient
+        ];
+        // dd($data['details']['health']['id']);
+
+        $pdf = PDF::loadView('doctor.pages.health_page_pdf', $data);
+        return $pdf->stream('document.pdf');
+    }
+
+    public function profileHealthPage($date){
+        $health = HealthFile::where('date', $date)->firstOrFail();
+        $patient = Patient::where('id', $health->patient_id)->firstOrFail();
+        
         $data['details'] = [
             'health' => $health,
             'patient' => $patient

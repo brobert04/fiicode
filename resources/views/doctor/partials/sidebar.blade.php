@@ -33,6 +33,40 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('doctor.patients')}}" class="nav-link">
+              <i class="nav-icon fas fa-arrow-right"></i>
+              <p>
+                  Transfer Patients
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">CALENDAR</li>
+          <li class="nav-item">
+            <a href="{{route('doctor.patients')}}" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>
+                  Calendar
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('doctor.patients')}}" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                  Appointments
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">SETTINGS</li>
+          <li class="nav-item">
+            <a href="{{route('profile.edit')}}" class="nav-link">
+              <i class="nav-icon fas fa-pen"></i>
+              <p>
+                  Edit profile
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
