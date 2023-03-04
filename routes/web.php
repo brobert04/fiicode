@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Auth\PatientRegistration;
+use App\Models\Doctor;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::get('/health-file/pdf/{id}', [DoctorController::class, 'healthFileShow'])->name('doctor.health-file.pdf');
 
     Route::get('/health-file/edit/{date}', [DoctorController::class, 'profileHealthPage'])->name('doctor.health-file.profile');
+
+    Route::delete('/patients/delete/{id}', [DoctorController::class, 'deletePatient'])->name('doctor.patients.delete');
 });
 
 

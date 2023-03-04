@@ -22,7 +22,8 @@ class DoctorController extends Controller
     }
 
     public function sendInvite(){
-        $invitations =  Invitation::where('doctor_email', Auth::user()->email)->get();   
+        $invitations =  Invitation::where('doctor_email', auth()->user()->email)->get(); 
+        // dd($invitations);  
         return view('doctor.pages.send_invitation', compact('invitations'));
     }
 
@@ -107,4 +108,9 @@ class DoctorController extends Controller
         return $pdf->stream('document.pdf');
     }
 
+    public function deletePatient($id){
+        $patient = Patient::where('id', $id)->firstOrFail();
+        $patient->user->delete();
+        return redirect()->route('doctor.patients')->with('success', 'Patient deleted successfully');
+    }
 }   

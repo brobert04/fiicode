@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('health_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained('patients');
+            $table->foreignId('patient_id')->constrained('patients')->onUpdate('cascade')->onDelete('cascade');
             $table->string('blood_type')->nullable();
             $table->text('allergies')->nullable();
             $table->integer('weight')->nullable();

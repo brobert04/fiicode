@@ -38,7 +38,14 @@
             <a href="{{ route('doctor.health-file', $patient->id) }}" class="btn btn-success text-white" title="Create new health file">
               <i class="fas fa-plus"></i>
             </a>
-            <a href="" class="btn btn-danger text-white">
+            <form id="delete-form-{{ $patient->id }}" action={{ route('doctor.patients.delete', $patient->id) }} method="post" style="display:inline-block;">
+              @csrf
+              @method('DELETE')
+            </form>
+            <a class="btn btn-danger text-white" style="cursor: pointer" onclick="if(confirm('Confirmați ștergerea utilizatorului {{$patient->user->name}}?')){
+              event.preventDefault();
+              document.getElementById('delete-form-'+{{$patient->id}}).submit();}
+              ">
               <i class="fas fa-trash"></i>
             </a>
           </td>

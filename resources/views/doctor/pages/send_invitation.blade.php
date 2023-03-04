@@ -28,36 +28,45 @@
             <!-- /.card-footer -->
         </form>
     </div>
-    @if(!empty($invitations))
+    @empty($invitations)
+    @else
         <div class="card card-dark">
             <div class="card-header">
                 <h3 class="card-title">Invites Sent</h3>
-            </div>
+            </div>  
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
-                    <tr style="text-align: center;">
-                        <th>Email</th>
-                        <th>Created At</th>
-                        <th>Status</th>
-                    </tr>
-                    @foreach($invitations as $invitation)
-                    <tr style="text-align: center;">
-                        <td>{{$invitation->email}}</td>
-                        <td>{{$invitation->created_at}}</td>
-                        @if($invitation->status === 1){
-                            <td><span class="badge bg-success">Accepted</span></td>
-                        }
-                        @else{
-                            <td><span class="badge bg-warning">Pending</span></td>
-                        }
-                        @endif
-                    </tr>
-                    @endforeach
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th>Email</th>
+                            <th>Created At</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($invitations as $invitation)
+                        <tr style="text-align: center;">
+                            <td>
+                                {{ $invitation->email }}
+                            </td>
+                            <td>
+                                {{ $invitation->created_at  }}
+                            </td>
+                            <td>
+                                @if($invitation->status === 1)
+                                    <span class="badge bg-success">Accepted</span>
+                                @else
+                                    <span class="badge bg-warning">Pending</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
-    @endif
+    @endempty
 @endsection
 @section('custom-js')
 <script src="{{ asset('../assets/plugins/toastr/toastr.min.js') }}"></script>
