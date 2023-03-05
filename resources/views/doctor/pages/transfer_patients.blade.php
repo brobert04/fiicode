@@ -14,34 +14,36 @@
       <h3 class="profile-username text-center font-weight-bold">Transfer Patients</h3>
 
       <p class="text-muted text-center">Transfer your patients to other doctors</p>
-
-      <div class="row text-center">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Choose Patient</label>
-                <select class="form-control select2" style="width: 100%;">
-                @foreach ($patients as $patient )
-                  <option value='{{ $patient->id }}'>{{ $patient->user->name }}</option>
-                @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-md-4" style="display:flex; flex-direction:column; align-items: center; justify-content: center">
-            <i class="fas fa-arrow-right"></i>
-            <i class="fas fa-arrow-left"></i>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Choose Doctor</label>
-                <select class="form-control select2" style="width: 100%;">
-                @foreach ($doctors as $doctor )
-                  <option value={{ $doctor->id }}>{{ $doctor->user->name }}</option>
-                @endforeach
-                </select>
+      <form action="{{ route('doctor.transfer.patients.store') }}" method="post">
+        @csrf 
+        <div class="row text-center">
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label>Choose Patient</label>
+                  <select class="form-control select2" style="width: 100%;" id="patient_id" name="patient_id">
+                  @foreach ($patients as $patient )
+                    <option value='{{ $patient->id }}'>{{ $patient->user->name }}</option>
+                  @endforeach
+                  </select>
               </div>
+          </div>
+          <div class="col-md-4" style="display:flex; flex-direction:column; align-items: center; justify-content: center">
+              <i class="fas fa-arrow-right"></i>
+              <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <label>Choose Doctor</label>
+                  <select class="form-control select2" style="width: 100%;" id="doctor_id" name="doctor_id">
+                  @foreach ($doctors as $doctor )
+                    <option value={{ $doctor->id }}>{{ $doctor->user->name }}</option>
+                  @endforeach
+                  </select>
+                </div>
+          </div>
+          <button class="btn btn-block btn-primary mt-4">Transfer</button>
         </div>
-        <button class="btn btn-block btn-primary mt-4">Transfer</button>
-      </div>
+      </form>
     </div>
     <!-- /.card-body -->
   </div>
@@ -58,5 +60,25 @@
         theme: 'bootstrap4'
         })
     });
+</script>
+<script>
+  @if(session()->has('success'))
+      $(document).Toasts('create', {
+                  class: 'bg-success',
+                  title: 'Patient management',
+                  autohide: true,
+                  delay: 2500,
+                  body: '{{ session()->get('success') }}'
+      })
+  @endif
+      @if(session()->has('error'))
+      $(document).Toasts('create', {
+                  class: 'bg-danger',
+                  title: 'Patient management',
+                  autohide: true,
+                  delay: 2500,
+                  body: '{{ session()->get('error') }}'
+      })
+      @endif
 </script>
 @endsection
