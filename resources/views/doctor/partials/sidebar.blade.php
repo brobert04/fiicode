@@ -60,7 +60,7 @@
           </li>
           <li class="nav-header">SETTINGS</li>
           <li class="nav-item">
-            <a href="{{route('profile.edit')}}" class="nav-link">
+            <a href="{{route('doctor.profile')}}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
               <p>
                   Edit profile

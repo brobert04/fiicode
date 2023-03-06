@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Auth\PatientRegistration;
+use App\Http\Controllers\DoctorProfileController;
 use App\Models\Doctor;
 use App\Http\Controllers\DoctorSendInviteController;
+use App\Http\Controllers\DoctorTransferPatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +37,9 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 
 // RUTE SPECIFICE DOCTORULUI
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor']], function(){
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/profile', [DoctorProfileController::class, 'index'])->name('doctor.profile');
+    
     Route::get('/send-invite', [DoctorSendInviteController::class, 'sendInvite'])->name('doctor.send-invite');
     Route::post('/send-invite', [DoctorSendInviteController::class, 'sendInviteStore'])->name('doctor.send-invite.store');
 
