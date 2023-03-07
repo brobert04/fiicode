@@ -98,7 +98,7 @@
                   <h5 class="card-title" style="font-size:25px; font-weight:bold;color:#012970;text-decoration: underline;">About</h5>
                 <br>
                   <p class="mt-3">
-                    .
+                    {{ auth()->user()->doctor->about }}
                   </p>
 
                   <h5 class="card-title" style="font-size:25px; font-weight:bold;color:#012970;text-decoration: underline;">Profile Details</h5>
@@ -110,12 +110,16 @@
 
                   <div class="row mb-2">
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">Birthdate</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-9 col-md-8">
+                      {{ auth()->user()->doctor->bod }}
+                    </div>
                   </div>
 
                   <div class="row  mb-2">
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">Company</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-9 col-md-8">
+                      {{ auth()->user()->doctor->company }}
+                    </div>
                   </div>
 
                   <div class="row  mb-2">
@@ -125,7 +129,9 @@
 
                   <div class="row  mb-2">
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">Country</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-9 col-md-8">
+                      {{ auth()->user()->doctor->country }}
+                    </div>
                   </div>
 
                   <div class="row  mb-2">
@@ -144,7 +150,9 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">No. Patients</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-9 col-md-8">
+                      {{auth()->user()->doctor->patients->count()}}
+                    </div>
                   </div>
 
                 </div>
@@ -152,7 +160,7 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="{{ route('doctor.profile.update') }}" method="post">
                     {{-- <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -163,64 +171,106 @@
                         </div>
                       </div>
                     </div> --}}
-
+                    @csrf
                     <div class="row mb-3">
                       <label for="name" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="name" type="text" class="form-control" id="name" value="{{ auth()->user()->name }}">
+                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ auth()->user()->name }}">
+                        @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px"></textarea>
+                        <textarea name="about" class="form-control @error('about') is-invalid @enderror" id="about" style="height: 100px">{{ auth()->user()->doctor->about }}</textarea>
+                        @error('about')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="">
+                        <input name="company" type="text" class="form-control @error('company') is-invalid @enderror" id="company" value="{{ auth()->user()->doctor->company }}">
+                        @error('company')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="specialty" class="col-md-4 col-lg-3 col-form-label">Job</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="specialty" type="text" class="form-control" id="specialty" value="{{ auth()->user()->doctor->specialty }}">
+                        <input name="specialty" type="text" class="form-control @error('specialty') is-invalid @enderror" id="specialty" value="{{ auth()->user()->doctor->specialty }}">
+                        @error('specialty')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
+                        <input name="country" type="text" class="form-control @error('country') is-invalid @enderror" id="Country" value="{{ auth()->user()->doctor->country }}">
+                        @error('country')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                        <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" id="Address" value="{{ auth()->user()->doctor->address }}">
+                        @error('address')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                        <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" id="Phone" value="{{ auth()->user()->doctor->phone }}">
+                        @error('phone')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                        <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="Email" value="{{ auth()->user()->email }}">
+                        @error('email')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
+                      <div class="col-md-8 col-lg-9">
+                       <select class="custom-select" id="gender" name="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                       </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="date" class="col-md-4 col-lg-3 col-form-label">Birthdate</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value={{ auth()->user()->doctor->bod }}>
+                        @error('date')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                       </div>
                     </div>
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
@@ -246,7 +296,7 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
                       </div>
-                    </div>
+                    </div> --}}
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Save Changes</button>

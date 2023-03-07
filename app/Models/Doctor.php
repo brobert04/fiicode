@@ -10,6 +10,8 @@ class Doctor extends Model
 {
     use HasFactory;
 
+
+
     //how to connect with users table
     public function user(){
         return $this->belongsTo(User::class);
