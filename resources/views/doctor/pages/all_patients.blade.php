@@ -85,5 +85,5 @@
                     body: '{{ session()->get('error') }}'
         })
         @endif
-</script>
+  </script>
 @endsection

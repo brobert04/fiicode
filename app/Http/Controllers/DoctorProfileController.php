@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DoctorUpdatePasswordRequest;
 
 class DoctorProfileController extends Controller
 {
@@ -34,4 +35,19 @@ class DoctorProfileController extends Controller
         return redirect()->back()->with('success', 'Profile updated successfully');
     }
 
+    public function resetPassword(DoctorUpdatePasswordRequest $request)
+    {
+        if(Auth::attempt(['email'=>auth()->user()->email, 'password'=>$request->password]))
+        {
+            $newPassword = bcrypt($request->newpassword);
+            $user = User::find(auth()->user()->id);
+            $user->password = $newPassword;
+            $user->save();
+            return redirect()->back()->with('success', 'Password has been changed.');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Current password is wrong.');
+        }
+    }
 }

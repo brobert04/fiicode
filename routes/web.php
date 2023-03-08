@@ -40,6 +40,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
 
     Route::get('/profile', [DoctorProfileController::class, 'index'])->name('doctor.profile');
     Route::post('/profile', [DoctorProfileController::class, 'update'])->name('doctor.profile.update');
+    Route::put('/profile/password', [DoctorProfileController::class, 'resetPassword'])->name('doctor.profile.password');
     
     Route::get('/send-invite', [DoctorSendInviteController::class, 'sendInvite'])->name('doctor.send-invite');
     Route::post('/send-invite', [DoctorSendInviteController::class, 'sendInviteStore'])->name('doctor.send-invite.store');
