@@ -11,7 +11,7 @@ class DashboardController extends Controller
             return view('doctor.pages.dashboard');
         }
         elseif (auth()->user()->role=="patient") {
-            return view('dashboard_patient');
+            return view('patient.pages.dashboard');
         }
     }
 }

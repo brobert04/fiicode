@@ -56,8 +56,12 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::post('transfer-patients', [DoctorTransferPatientController::class, 'transferPatients'])->name('doctor.transfer.patients.store');
 });
 
-
-
+Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patient']], function(){
+    Route::get('/my-doctor', function(){
+        $doctor = Doctor::where('id', auth()->user()->patient->doctor_id)->firstOrFail();
+        return view('patient.pages.doctor_page', compact('doctor'));
+    })->name('patient.my-doctor');
+});
 
 Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('patient.register')->middleware('guest', 'hasInvitation');
 Route::post('/patient/register', [PatientRegistration::class, 'store'])->name('patient.register.store');

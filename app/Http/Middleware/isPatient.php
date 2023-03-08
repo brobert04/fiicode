@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class isDoctor
+class isPatient
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,9 @@ class isDoctor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user() && auth()->user()->role=="doctor"){
+        if(auth()->user() && auth()->user()->role=="patient"){
             return $next($request);
         }
-        return redirect()->back();
+        return redirect('dashboard');
     }
 }
