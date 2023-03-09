@@ -50,4 +50,8 @@ class DoctorProfileController extends Controller
             return redirect()->back()->with('error', 'Current password is wrong.');
         }
     }
+
+    public function businessHours(){
+        
+    }
 }

@@ -4,18 +4,12 @@
  <!-- Google Fonts -->
  <link href="https://fonts.gstatic.com" rel="preconnect">
  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
- <!-- Vendor CSS Files -->
- {{-- <link href="{{ asset('../assets/profile/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
  <link href="{{ asset('../assets/profile/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
  <link href="{{ asset('../assets/profile/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
  <link href="{{ asset('../assets/profile/vendor/quill/quill.snow.css') }}" rel="stylesheet">
  <link href="{{ asset('../assets/profile/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
  <link href="{{ asset('../assets/profile/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
 
-
- <!-- Template Main CSS File -->
- {{-- <link href="{{ asset('../assets/profile/css/style.css') }}" rel="stylesheet"> --}}
 
 @endsection
 @section('content')
@@ -82,6 +76,10 @@
 
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#business-hours">Edit Business Hours</button>
                 </li>
 
                 <li class="nav-item">
@@ -301,8 +299,48 @@
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-settings">
+                <div class="tab-pane fade pt-3" id="business-hours">
+                  <form action="{{ route('doctor.profile.password') }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="row mb-3">
+                      <label for="day" class="col-md-4 col-lg-3 col-form-label">Day</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select id="day" name="day" class="form-control">
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                      </select>
+                        @error('day') <span class="text-danger small">{{$message}}</span>@enderror
+                      </div>
+                    </div>
 
+                    <div class="row mb-3">
+                      <label for="start_hour" class="col-md-4 col-lg-3 col-form-label">Start Hours</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input id="start_hour" type="time" name="start_hour" class="form-control">
+
+                        @error('start_hour') <span class="text-danger small">{{$message}}</span>@enderror
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="end_hour" class="col-md-4 col-lg-3 col-form-label">End Hours</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input id="end_hour" type="time" name="end_hour" class="form-control">
+                        
+                        @error('end_hour') <span class="text-danger small">{{$message}}</span>@enderror
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Save Hours</button>
+                    </div>
+                  </form>
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
@@ -350,7 +388,7 @@
       </div>
     </section>
 
-  </main>
+</main>
 @endsection
 @section('custom-js')
 <!-- Vendor JS Files -->
