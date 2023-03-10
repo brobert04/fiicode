@@ -44,4 +44,11 @@
 <script src="{{ asset('../assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('../assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('../assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script>
+    document.querySelector('#dark').addEventListener('click', function(n) {
+        document.querySelector('body').classList.toggle('dark-mode');
+        document.querySelector('nav').classList.toggle('navbar-dark');
+        document.querySelector('#but').classList.toggle('fa-sun');
+    });
+</script>
 @yield('custom-js')

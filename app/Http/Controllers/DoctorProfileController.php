@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBusinessHoursRequest;
+use App\Models\DoctorHours;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +17,9 @@ class DoctorProfileController extends Controller
     }
     public function index()
     {
+        $hours = DoctorHours::where('doctor_id', auth()->user()->doctor->id)->get();
         $documents = json_decode(Auth::user()->doctor->documents);
-        return view('doctor.pages.profile', compact('documents'));
+        return view('doctor.pages.profile', compact('documents', 'hours'));
     }
 
     public function update(Request $request){
@@ -51,7 +54,27 @@ class DoctorProfileController extends Controller
         }
     }
 
-    public function businessHours(){
-        
+    public function businessHours(Request $request){
+
+        // validate the day to be unique
+
+        $this->validate($request, [
+            'day' => 'required|unique:doctor_hours,day,NULL,id,doctor_id,' . auth()->user()->doctor->id,
+        ], [
+            'day.unique' => 'You already have a record for this day. Please choose another day.',
+        ]);
+
+        $hours = new DoctorHours();
+        $hours->doctor_id = auth()->user()->doctor->id;
+        $hours->day = $request->day;
+        $hours->start_hour = $request->start_hour;
+        $hours->end_hour = $request->end_hour;
+        $hours->save();
+        return redirect()->back()->with('success', 'Business hours added successfully');
+    }
+
+    public function editBusinessHours($id){
+        $hours = DoctorHours::find($id);
+        return view('doctor.pages.edit_hours', compact('hours'));
     }
 }

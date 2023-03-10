@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('doctor_hours', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('day');
-            $table->time('start_hour');
-            $table->time('end_hour');
+            $table->string('day');
+            $table->time('start_hour')->nullable();
+            $table->time('end_hour')->nullable();
             $table->timestamps();
+
+            $table->unique(['doctor_id', 'day']);
         });
     }
 

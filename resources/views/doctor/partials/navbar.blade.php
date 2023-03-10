@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -129,5 +129,10 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+        <li class="nav-item">
+            <a class="nav-link" role="button" id="dark" title="Change theme">
+                <i id="but" class="fas fa-moon"></i>
+            </a>
+        </li>
     </ul>
   </nav>

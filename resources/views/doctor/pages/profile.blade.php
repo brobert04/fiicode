@@ -24,6 +24,41 @@
               <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random&size=128"" alt="Profile" class="rounded-circle">
               <h3 class="mt-3">{{ auth()->user()->name }}</h3>
               <p class="text-muted">{{ auth()->user()->doctor->specialty }}</p>
+              @empty($hours)
+              @else
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">
+                  @foreach ($hours as $hour)
+                  @php
+                      $day = $hour['day'];
+                      $openingHour = \Carbon\Carbon::parse($hour['start_hour']);
+                      $closingHour = \Carbon\Carbon::parse($hour['end_hour']);
+                  @endphp
+                  @if (\Carbon\Carbon::now()->isDayOfWeek($day))
+                      @if (\Carbon\Carbon::now()->between($openingHour, $closingHour))
+                          <span style="color:green;">Opened</span>
+                      @else
+                          <span style="color:red">Closed</span>
+                      @endif
+                  @endif
+                @endforeach
+                </button>
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                  <div class="dropdown-menu" role="menu">
+                    @foreach ($hours as $h)
+                    @if($h->start_hour && $h->end_hour)
+                      <a class="dropdown-item" href="#"><span style="text-transform: capitalize">{{ $h->day }}</span> - <span class="badge bg-success">{{ \Carbon\Carbon::parse($h->start_hour)->format('H:i')}} - {{ \Carbon\Carbon::parse($h->end_hour)->format('H:i')}}</span></a>
+                    @else
+                      <a class="dropdown-item" href="#">
+                        <span style="text-transform: capitalize">{{ $h->day }}</span> - <span class="badge bg-danger">Closed</span>
+                      </a>
+                    @endif
+                    @endforeach
+                  </div>
+              </div>
+              @endempty
               {{-- <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -79,7 +114,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#business-hours">Edit Business Hours</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#business-hours">Add Business Hours</button>
                 </li>
 
                 <li class="nav-item">
@@ -300,21 +335,20 @@
                 </div>
 
                 <div class="tab-pane fade pt-3" id="business-hours">
-                  <form action="{{ route('doctor.profile.password') }}" method="post">
+                  <form action="{{ route('doctor.profile.business-hours') }}" method="post">
                     @csrf
-                    @method('PUT')
                     <div class="row mb-3">
                       <label for="day" class="col-md-4 col-lg-3 col-form-label">Day</label>
                       <div class="col-md-8 col-lg-9">
                         <select id="day" name="day" class="form-control">
-                          <option value="1">Monday</option>
-                          <option value="2">Tuesday</option>
-                          <option value="3">Wednesday</option>
-                          <option value="4">Thursday</option>
-                          <option value="5">Friday</option>
-                          <option value="6">Saturday</option>
-                          <option value="7">Sunday</option>
-                      </select>
+                          <option value="monday">Monday</option>
+                          <option value="tuesday">Tuesday</option>
+                          <option value="wednesday">Wednesday</option>
+                          <option value="thrusday">Thursday</option>
+                          <option value="friday">Friday</option>
+                          <option value="satuday">Saturday</option>
+                          <option value="sunday">Sunday</option>
+                        </select>
                         @error('day') <span class="text-danger small">{{$message}}</span>@enderror
                       </div>
                     </div>
@@ -339,8 +373,41 @@
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Save Hours</button>
+                      <a class="btn btn-primary" id="edit" onclick="toggleTable()">Edit Hours</a>
                     </div>
                   </form>
+                  <div class="card mt-4" id="edit-hours" style="display: none">
+                    <div class="card-body table-responsive p-0">
+                      <table class="table table-hover text-nowrap">
+                        <thead>
+                          <tr>
+                            <th>Day</th>
+                            <th>Opening Hours</th>
+                            <th>Closing Hours</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($hours as $ho )
+                          <tr>
+                            <td style="text-transform: capitalize;">{{ $ho->day }}</td>
+                            <td style="color:green">
+                              {!! $ho->start_hour && $ho->end_hour ? \Carbon\Carbon::parse($ho->start_hour)->format('H:i') : '<span style="color:red">Closed</span>' !!}
+                            </td>
+                            <td style="color:red;">
+                              {{ $ho->start_hour && $ho->end_hour ? \Carbon\Carbon::parse($ho->end_hour)->format('H:i') : 'Closed' }}
+                          </td>
+                            <td>
+                                <a href="{{ route('doctor.profile.business-hours.edit',$ho->id) }}" class="btn btn-primary text-white" title="See health-file">
+                                    Edit
+                                </a>
+                            </td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
@@ -422,5 +489,15 @@
                     body: '{{ session()->get('error') }}'
         })
         @endif
+</script>
+<script>
+  function toggleTable() {
+    var table = document.getElementById("edit-hours");
+    if (table.style.display === "none") {
+      table.style.display = "block";
+    } else {
+      table.style.display = "none";
+    }
+  }
 </script>
 @endsection
