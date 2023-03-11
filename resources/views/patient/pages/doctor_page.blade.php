@@ -1,4 +1,5 @@
 @extends('patient.template')
+@section('title', 'Medicool | Doctor Profile')
 @section('custom-css')
 <link href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -17,9 +18,44 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random&size=128"" alt="Profile" class="rounded-circle">
+              <img src="https://ui-avatars.com/api/?name={{ auth()->user()->patient->doctor->user->name }}&background=random&size=128"" alt="Profile" class="rounded-circle">
               <h3 class="mt-3">{{ $doctor->user->name }}</h3>
               <p class="text-muted">{{ $doctor->specialty }}</p>
+              @empty($hours)
+              @else
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">
+                  @foreach ($hours as $hour)
+                  @php
+                      $day = $hour['day'];
+                      $openingHour = \Carbon\Carbon::parse($hour['start_hour']);
+                      $closingHour = \Carbon\Carbon::parse($hour['end_hour']);
+                  @endphp
+                  @if (\Carbon\Carbon::now()->isDayOfWeek($day))
+                      @if (\Carbon\Carbon::now()->between($openingHour, $closingHour))
+                          <span style="color:green;">Opened</span>
+                      @else
+                          <span style="color:red">Closed</span>
+                      @endif
+                  @endif
+                @endforeach
+                </button>
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                  <div class="dropdown-menu" role="menu">
+                    @foreach ($hours as $h)
+                    @if($h->start_hour && $h->end_hour)
+                      <a class="dropdown-item"><span style="text-transform: capitalize">{{ $h->day }}</span> - <span class="badge bg-success">{{ \Carbon\Carbon::parse($h->start_hour)->format('H:i')}} - {{ \Carbon\Carbon::parse($h->end_hour)->format('H:i')}}</span></a>
+                    @else
+                      <a class="dropdown-item">
+                        <span style="text-transform: capitalize">{{ $h->day }}</span> - <span class="badge bg-danger">Closed</span>
+                      </a>
+                    @endif
+                    @endforeach
+                  </div>
+              </div>
+              @endempty
               {{-- <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>

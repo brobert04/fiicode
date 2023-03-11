@@ -17,7 +17,18 @@ class DoctorProfileController extends Controller
     }
     public function index()
     {
-        $hours = DoctorHours::where('doctor_id', auth()->user()->doctor->id)->get();
+        $dayMap = [
+            'monday' => 1,
+            'tuesday' => 2,
+            'wednesday' => 3,
+            'thursday' => 4,
+            'friday' => 5,
+            'saturday' => 6,
+            'sunday' => 7,
+        ];
+        $hours = DoctorHours::where('doctor_id', auth()->user()->doctor->id)->get()->sortBy(function($hours) use ($dayMap){
+            return $dayMap[$hours->day];
+        });
         $documents = json_decode(Auth::user()->doctor->documents);
         return view('doctor.pages.profile', compact('documents', 'hours'));
     }
@@ -76,5 +87,20 @@ class DoctorProfileController extends Controller
     public function editBusinessHours($id){
         $hours = DoctorHours::find($id);
         return view('doctor.pages.edit_hours', compact('hours'));
+    }
+
+    public function updateBusinessHours(Request $request, $id){
+        // CREATE VALIDATION FOR THIS
+        $this->validate($request, [
+            'day' => 'required|unique:doctor_hours,day,' . $id . ',id,doctor_id,' . auth()->user()->doctor->id,
+        ], [
+            'day.unique' => 'You already have a record for this day. Please choose another day.',
+        ]);
+        $hours = DoctorHours::find($id);
+        $hours->day = $request->day;
+        $hours->start_hour = $request->start_hour;
+        $hours->end_hour = $request->end_hour;
+        $hours->save();
+        return redirect()->route('doctor.profile')->with('success', 'Business hours updated successfully');
     }
 }

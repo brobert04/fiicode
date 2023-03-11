@@ -34,7 +34,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('patient.medical-history') }}" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Medical History
@@ -43,7 +43,7 @@
           </li>
           <li class="nav-header">APPOINTMENTS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('patient.make-appointment') }}" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Book Appointment

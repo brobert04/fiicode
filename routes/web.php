@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\DoctorHours;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\DoctorProfileController;
 use App\Models\Doctor;
 use App\Http\Controllers\DoctorSendInviteController;
 use App\Http\Controllers\DoctorTransferPatientController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::put('/profile/password', [DoctorProfileController::class, 'resetPassword'])->name('doctor.profile.password');
     Route::post('/profile/business-hours', [DoctorProfileController::class, 'businessHours'])->name('doctor.profile.business-hours');
     Route::get('/profile/business-hours/{id}', [DoctorProfileController::class, 'editBusinessHours'])->name('doctor.profile.business-hours.edit');
+    Route::put('/profile/business-hours/{id}', [DoctorProfileController::class, 'updateBusinessHours'])->name('doctor.profile.business-hours.update');
     
     Route::get('/send-invite', [DoctorSendInviteController::class, 'sendInvite'])->name('doctor.send-invite');
     Route::post('/send-invite', [DoctorSendInviteController::class, 'sendInviteStore'])->name('doctor.send-invite.store');
@@ -61,8 +64,27 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
 Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patient']], function(){
     Route::get('/my-doctor', function(){
         $doctor = Doctor::where('id', auth()->user()->patient->doctor_id)->firstOrFail();
-        return view('patient.pages.doctor_page', compact('doctor'));
+        $dayMap = [
+            'monday' => 1,
+            'tuesday' => 2,
+            'wednesday' => 3,
+            'thursday' => 4,
+            'friday' => 5,
+            'saturday' => 6,
+            'sunday' => 7,
+        ];
+        $hours = DoctorHours::where('doctor_id', $doctor->id)->get()->sortBy(function($hours) use ($dayMap){
+            return $dayMap[$hours->day];
+        });
+        return view('patient.pages.doctor_page', compact('doctor', 'hours'));
     })->name('patient.my-doctor');
+
+    Route::get('/medical-history', function(){
+        $files = auth()->user()->patient->healthFile;
+        return view('patient.pages.medical_history', compact('files'));
+    })->name('patient.medical-history');
+
+    Route::get('/make-appointment', [PatientController::class, 'appointmentIndex'])->name('patient.make-appointment');
 });
 
 Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('patient.register')->middleware('guest', 'hasInvitation');

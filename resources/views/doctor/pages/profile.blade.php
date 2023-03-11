@@ -346,7 +346,7 @@
                           <option value="wednesday">Wednesday</option>
                           <option value="thrusday">Thursday</option>
                           <option value="friday">Friday</option>
-                          <option value="satuday">Saturday</option>
+                          <option value="saturday">Saturday</option>
                           <option value="sunday">Sunday</option>
                         </select>
                         @error('day') <span class="text-danger small">{{$message}}</span>@enderror
