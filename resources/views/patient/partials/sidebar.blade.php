@@ -46,7 +46,7 @@
             <a href="{{ route('patient.make-appointment') }}" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
-                Book Appointment
+                Request Appointment
               </p>
             </a>
           </li>

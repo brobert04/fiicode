@@ -20,4 +20,8 @@ class Patient extends Model
     public function healthFile(){
         return $this->hasMany(HealthFile::class);
     }
+
+    public function appointmentRequest(){
+        return $this->hasMany(AppointmentRequest::class);
+    }
 }

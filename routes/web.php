@@ -11,6 +11,7 @@ use App\Models\Doctor;
 use App\Http\Controllers\DoctorSendInviteController;
 use App\Http\Controllers\DoctorTransferPatientController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DoctorAppointmentRequestsManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
 
     Route::get('transfer-patients', [DoctorTransferPatientController::class, 'transferPatientsIndex'])->name('doctor.transfer.patients.index');
     Route::post('transfer-patients', [DoctorTransferPatientController::class, 'transferPatients'])->name('doctor.transfer.patients.store');
+
+    Route::get('/appointment-requests', [DoctorAppointmentRequestsManagement::class, 'index'])->name('doctor.appointment-requests');
 });
 
 Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patient']], function(){
@@ -84,7 +87,8 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patie
         return view('patient.pages.medical_history', compact('files'));
     })->name('patient.medical-history');
 
-    Route::get('/make-appointment', [PatientController::class, 'appointmentIndex'])->name('patient.make-appointment');
+    Route::get('/request-appointment', [PatientController::class, 'appointmentIndex'])->name('patient.make-appointment');
+    Route::post('/request-appointment', [PatientController::class, 'appointmentSave'])->name('patient.make-appointment.save');
 });
 
 Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('patient.register')->middleware('guest', 'hasInvitation');
