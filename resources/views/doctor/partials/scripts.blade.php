@@ -51,4 +51,11 @@
         document.querySelector('#but').classList.toggle('fa-sun');
     });
 </script>
+<script type="module">
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+</script>
 @yield('custom-js')

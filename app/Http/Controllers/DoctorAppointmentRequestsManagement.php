@@ -13,11 +13,16 @@ class DoctorAppointmentRequestsManagement extends Controller
         // $app = AppointmentRequest::where('patient_id', auth()->user()->doctor->patient->id)->get();
         // dd($app);
         // get all the requests based on the patients ids for all the doctors patients
-       
+
         $patients = Patient::where('doctor_id', auth()->user()->doctor->id)->get();
-        foreach($patients as $patient){
-            $app = AppointmentRequest::where('patient_id', $patient->id)->get();
+        if($patients->isNotEmpty()){
+            foreach($patients as $patient){
+                $app = AppointmentRequest::where('patient_id', $patient->id)->orderBy('created_at', 'desc')->get();
+            }
+        }else{
+            $app = [];
         }
+
         return view('doctor.pages.appointment_requests', compact('app'));
     }
 }

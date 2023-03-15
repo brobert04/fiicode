@@ -52,7 +52,7 @@
         <div class="form-group">
             <label for="doctor">Doctor</label>
             <select class="form-control" id="doctor" name="doctor">
-                <option value="{{ auth()->user()->patient->doctor->user->name }}" selected>
+                <option value="{{ auth()->user()->patient->doctor->id}}" selected>
                     {{ auth()->user()->patient->doctor->user->name }}</option>
             </select>
           </div>

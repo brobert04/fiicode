@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-body box-profile">
-      <div class="text-center">     
+      <div class="text-center">
          <img src="https://ui-avatars.com/api/?name={{ $patient->user->name }}&background=random&size=128" alt="{{ $patient->user->name }} Avatar" class="profile-user-img img-fluid img-circle">
       </div>
 
@@ -19,7 +19,7 @@
           <b>Health Reports</b> <a class="float-right">{{ $health->count() }}</a>
         </li>
         <li class="list-group-item">
-          <b>Next Appointment</b> <a class="float-right">-</a>
+          <b>Next Appointment</b><a class="float-right">{{ \Carbon\Carbon::parse($apppointment->start)->format('d/m/Y') }}</a>
         </li>
       </ul>
 
@@ -65,7 +65,7 @@
 @section('custom-js')
 <script>
     $(function () {
-        $('#show').click(function (e) { 
+        $('#show').click(function (e) {
             e.preventDefault();
             $('.card').removeAttr('hidden');
         });

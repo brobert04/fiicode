@@ -12,6 +12,7 @@ use App\Http\Controllers\DoctorSendInviteController;
 use App\Http\Controllers\DoctorTransferPatientController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorAppointmentRequestsManagement;
+use App\Http\Controllers\DoctorCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::post('/profile/business-hours', [DoctorProfileController::class, 'businessHours'])->name('doctor.profile.business-hours');
     Route::get('/profile/business-hours/{id}', [DoctorProfileController::class, 'editBusinessHours'])->name('doctor.profile.business-hours.edit');
     Route::put('/profile/business-hours/{id}', [DoctorProfileController::class, 'updateBusinessHours'])->name('doctor.profile.business-hours.update');
-    
+
     Route::get('/send-invite', [DoctorSendInviteController::class, 'sendInvite'])->name('doctor.send-invite');
     Route::post('/send-invite', [DoctorSendInviteController::class, 'sendInviteStore'])->name('doctor.send-invite.store');
 
@@ -62,6 +63,11 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::post('transfer-patients', [DoctorTransferPatientController::class, 'transferPatients'])->name('doctor.transfer.patients.store');
 
     Route::get('/appointment-requests', [DoctorAppointmentRequestsManagement::class, 'index'])->name('doctor.appointment-requests');
+
+    Route::resource('calendar', DoctorCalendarController::class, [
+        'only' => ['index', 'store','destroy']
+    ]);
+    Route::get('refetch-appointments', [DoctorCalendarController::class, 'refetchAppointments'])->name('refetch-appointments');
 });
 
 Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patient']], function(){
@@ -96,7 +102,7 @@ Route::post('/patient/register', [PatientRegistration::class, 'store'])->name('p
 
 
 // Route::middleware('auth')->group(function () {
-    
+
 // });
 
 require __DIR__.'/auth.php';

@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('appointment_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->date('date');
             $table->time('time');
-            $table->string('doctor');
             $table->string('reason');
             $table->string('status')->default('pending');
             $table->string('message')->nullable();

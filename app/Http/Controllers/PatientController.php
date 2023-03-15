@@ -19,7 +19,7 @@ class PatientController extends Controller
         $app->phone = $request->phone;
         $app->date = $request->date;
         $app->time = $request->time;
-        $app->doctor = $request->doctor;
+        $app->doctor_id = $request->doctor;
         $app->reason = $request->reason;
         $app->save();
         return redirect()->back()->with('success', 'Appointment Request Sent Successfully');

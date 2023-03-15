@@ -344,7 +344,7 @@
                           <option value="monday">Monday</option>
                           <option value="tuesday">Tuesday</option>
                           <option value="wednesday">Wednesday</option>
-                          <option value="thrusday">Thursday</option>
+                          <option value="thursday">Thursday</option>
                           <option value="friday">Friday</option>
                           <option value="saturday">Saturday</option>
                           <option value="sunday">Sunday</option>
@@ -366,7 +366,7 @@
                       <label for="end_hour" class="col-md-4 col-lg-3 col-form-label">End Hours</label>
                       <div class="col-md-8 col-lg-9">
                         <input id="end_hour" type="time" name="end_hour" class="form-control">
-                        
+
                         @error('end_hour') <span class="text-danger small">{{$message}}</span>@enderror
                       </div>
                     </div>

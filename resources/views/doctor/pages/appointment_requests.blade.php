@@ -1,4 +1,5 @@
 @extends('doctor.template')
+@section('title', 'Appointment Requests')
 @section('custom-css')
 <link rel="stylesheet" href="{{asset('../assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
 @endsection
@@ -74,15 +75,17 @@
                     @endif
                 </td>
                 <td class="project-actions text-right">
-                    <a class="btn btn-success btn-sm" id="accept" href="#">
-                    <i class="fas fa-check"></i>
-                    </a>
-                    <form style="display: inline-block">
-                        <button class="btn btn-danger btn-sm" id="reject">
-                            <i class="fas fa-window-close">
-                            </i>
-                        </button>
-                    </form>
+                    @if($a->status === 'pending')
+                        <a class="btn btn-success btn-sm" id="accept" href="#">
+                        <i class="fas fa-check"></i>
+                        </a>
+                        <form style="display: inline-block">
+                            @csrf
+                            <button class="btn btn-danger btn-sm" id="reject">
+                                <i class="fas fa-window-close"></i>
+                            </button>
+                        </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
@@ -107,9 +110,29 @@
                 confirmButtonText: 'Go to Calendar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "{{route('doctor.send-invite')}}";
+                    window.location.href = "{{route('calendar.index')}}";
                 }
             })
         });
+
+        $(document).on('click', '#reject', function (e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var dataID = form.data('id');
+            Swal.fire({
+                title: 'Are you sure you want to reject the appointment?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+
 </script>
 @endsection

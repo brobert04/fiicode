@@ -43,7 +43,7 @@
           </li>
           <li class="nav-header">CALENDAR</li>
           <li class="nav-item">
-            <a href="{{route('doctor.patients')}}" class="nav-link">
+            <a href="{{route('calendar.index')}}" class="nav-link">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                   Calendar

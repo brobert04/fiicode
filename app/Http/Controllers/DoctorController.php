@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HealthFileRequest;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PatientRegister;
@@ -23,8 +24,9 @@ class DoctorController extends Controller
     public function patients(){
         if (request('patient')){
             $patient = Patient::where('id', request('patient'))->firstOrFail();
+            $apppointment = Appointment::where('patient_id', request('patient'))->latest()->firstOrFail();
             $health = HealthFile::where('patient_id', request('patient'))->get();
-            return view('doctor.pages.patient_history')->with(['patient' => $patient, 'health' => $health]);
+            return view('doctor.pages.patient_history')->with(['patient' => $patient, 'health' => $health, 'apppointment' => $apppointment]);
         }
         $patients = Auth::user()->doctor->patients;
         return view('doctor.pages.all_patients', compact('patients'));
@@ -75,7 +77,7 @@ class DoctorController extends Controller
     public function profileHealthPage($date){
         $health = HealthFile::where('date', $date)->firstOrFail();
         $patient = Patient::where('id', $health->patient_id)->firstOrFail();
-        
+
         $data['details'] = [
             'health' => $health,
             'patient' => $patient
@@ -92,4 +94,4 @@ class DoctorController extends Controller
         return redirect()->route('doctor.patients')->with('success', 'Patient deleted successfully');
     }
 
-}   
+}
