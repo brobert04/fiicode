@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateAppointmentRequest;
 use \App\Models\AppointmentRequest;
+use App\Http\Requests\UpdateAppointmentRequest;
 
 class DoctorCalendarController extends Controller
 {
@@ -78,14 +79,36 @@ class DoctorCalendarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $data['doctor_id'] = auth()->user()->doctor->id;
+        $appointmentService = new AppointmentService(auth()->user()->doctor);
+        $appointment = $appointmentService->update($id, $data);
+        if($appointment){
+            return response()->json([
+                'success' => true,
+            ]);
+        }else{
+            return response()->json([
+                'success' => true,
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $appointment = Appointment::findOrFail($id);
+        try{
+            $appointment->delete();
+            return response()->json([
+                'success' => true,
+            ]);
+        }catch (\Exception $e){
+            return response()->json([
+                'success' => false,
+            ]);
+        }
     }
 }

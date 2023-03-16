@@ -25,6 +25,12 @@ class AppointmentService {
         return $appointment;
     }
 
+    public function update($id, $data){
+        $appointment = Appointment::findOrFail($id);
+        $appointment->fill($data);
+        $appointment->save();
+        return $appointment;
+    }
     public function allAppointments($filters){
         $appointmentQuery = Appointment::query();
         $appointmentQuery->where('doctor_id', $this->doctor->id);

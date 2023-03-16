@@ -11,43 +11,17 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="sticky-top mb-3">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Upcoming Appointments</h4>
-              </div>
-              <div class="card-body">
-                <!-- the events -->
-                <div id="external-events">
-                    @foreach($appointments as $app)
-                        <div class="external-event bg-default">{{$app->title}} - <span style="color:red">{{$app->start}}</span></div>
-                    @endforeach
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-body p-0">
+                    <!-- THE CALENDAR -->
+                    <div id="calendar"></div>
                 </div>
-              </div>
-                <div class="card-footer">
-                    {{$appointments->links()}}
-                </div>
-              <!-- /.card-body -->
+                <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
-          <div class="card card-primary">
-            <div class="card-body p-0">
-              <!-- THE CALENDAR -->
-              <div id="calendar"></div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
   <div class="modal fade" id="modal-default">
@@ -134,6 +108,24 @@
               $('#end').val(endDate);
               modalReset();
               $('#modal-default').modal('show');
+            },
+            eventClick: function(info){
+                modalReset();
+                const event = info.event;
+                $('#title').val(info.event.title);
+                $('#event_id').val(info.event.id);
+                $('#description').val(event.extendedProps.description);
+                $('#patient').val(event.extendedProps.patient_id);
+                $('#start').val(event.extendedProps.startDay);
+                $('#end').val(event.extendedProps.endDay);
+                $('#is_all_day').prop('checked', event.allDay);
+                $('#modal-default').modal('show');
+                $('#deleteEventBtn').show();
+                if(info.event.allDay){
+                    initializeStartDateEndDateFormat("Y-m-d", true);
+                }else{
+                    initializeStartDateEndDateFormat("Y-m-d H:i", false);
+                }
             }
         });
         calendar.render();
@@ -178,19 +170,16 @@
         let eventId = $('#event_id').val();
         let url = '{{ route('calendar.store') }}'
         let postData = {
-          title: $('#title').val(),
-          description: $('#description').val(),
-          start: $('#start').val(),
-          end: $('#end').val(),
-          is_all_day: $('#is_all_day').prop('checked') ? 1 : 0,
-          patient_id: $('#patient').val()
-        }
-        if(postData.is_all_day){
-
-        }
+            title: $('#title').val(),
+            description: $('#description').val(),
+            start: $('#start').val(),
+            end: $('#end').val(),
+            is_all_day: $('#is_all_day').prop('checked') ? 1 : 0,
+            patient_id: $('#patient').val()
+        };
         if(eventId){
-          url: {{ url("/") }} + `/appointments/${eventId}`,
-          postData._method = "PUT"
+            url = '{{url('/doctor')}}' + `/calendar/${eventId}`;
+            postData._method = "PUT";
         }
         $.ajax({
           type:'POST',
@@ -206,6 +195,29 @@
             }
           }
         })
+      }
+      function deleteEvent(){
+          if(window.confirm('Are you sure you want to delete this appointment?')){
+              let eventId = $('#event_id').val();
+              let url = '';
+              if(eventId){
+                  url= '{{url('/doctor')}}' + `/calendar/${eventId}`;
+              }
+              $.ajax({
+                  type: 'DELETE',
+                  url: url,
+                  dataType: 'json',
+                  data: {},
+                  success: function(res){
+                      if(res.success){
+                          calendar.refetchEvents();
+                          $('#modal-default').modal('hide');
+                      }else{
+                          alert('Something went wrong!')
+                      }
+                  }
+              });
+          }
       }
 </script>
 @endsection

@@ -64,9 +64,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
 
     Route::get('/appointment-requests', [DoctorAppointmentRequestsManagement::class, 'index'])->name('doctor.appointment-requests');
 
-    Route::resource('calendar', DoctorCalendarController::class, [
-        'only' => ['index', 'store','destroy']
-    ]);
+    Route::resource('calendar', DoctorCalendarController::class)->except(['create', 'show', 'edit']);
     Route::get('refetch-appointments', [DoctorCalendarController::class, 'refetchAppointments'])->name('refetch-appointments');
 });
 
