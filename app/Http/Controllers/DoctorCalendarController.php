@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\AppointmentService;
 use App\Models\Appointment;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateAppointmentRequest;
 use \App\Models\AppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use Twilio\Rest\Client;
 
 class DoctorCalendarController extends Controller
 {
@@ -47,6 +49,23 @@ class DoctorCalendarController extends Controller
         $reqapp->save();
         $appointmentService = new AppointmentService(auth()->user()->doctor);
         $appointment = $appointmentService->create($data);
+        $req = AppointmentRequest::where('patient_id', $data['patient_id'])->latest()->firstOrFail();
+        $receiverNumber = $req->phone;
+
+        $message = 'Hello,' . $req->name . '!'. 'Your next appointment is on '.$data['start'].'. Thank you.';
+        try {
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create('+'.$receiverNumber, [
+                'from' => $twilio_number,
+                'body' => $message]);
+        } catch (Exception $e) {
+            return "Error: ". $e->getMessage();
+        }
+
         if($appointment){
             return response()->json([
                 'success' => true,
