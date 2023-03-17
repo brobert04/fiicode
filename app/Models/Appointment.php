@@ -10,7 +10,7 @@ class Appointment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'start', 'end' ,'title' ,'description' ,'doctor_id' ,'patient_id' ,'is_all_day'
+        'start', 'end' ,'title' ,'description' ,'doctor_id' ,'patient_id' ,'is_all_day', 'phone'
     ];
     public function doctor(){
         return $this->belongsTo(Doctor::class);

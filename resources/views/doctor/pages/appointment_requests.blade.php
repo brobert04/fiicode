@@ -79,13 +79,21 @@
                         <a class="btn btn-success btn-sm" id="accept" href="#">
                         <i class="fas fa-check"></i>
                         </a>
-                        <form style="display: inline-block">
+                        <form style="display: inline-block" action="{{route('doctor.appointment-requests.reject', $a->id)}}" method="post">
                             @csrf
+                            @method('PUT')
                             <button class="btn btn-danger btn-sm" id="reject">
                                 <i class="fas fa-window-close"></i>
                             </button>
                         </form>
                     @endif
+                        <form style="display: inline-block" action="{{route('doctor.appointment-requests.delete', $a->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" id="delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                 </td>
             </tr>
             @endforeach
@@ -133,6 +141,25 @@
                 }
             })
         });
+
+     $(document).on('click', '#delete', function (e) {
+         e.preventDefault();
+         var form = $(this).closest('form');
+         var dataID = form.data('id');
+         Swal.fire({
+             title: 'Are you sure you want to delete the appointment?',
+             text: "You won't be able to revert this!",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Yes'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 form.submit();
+             }
+         })
+     });
 
 </script>
 @endsection

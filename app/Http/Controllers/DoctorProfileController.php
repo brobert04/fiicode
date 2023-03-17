@@ -45,6 +45,7 @@ class DoctorProfileController extends Controller
         $doctor->phone = $request->phone;
         $doctor->bod = $request->date;
         $doctor->gender = $request->gender;
+        $doctor->profile_completed = 1;
         $doctor->save();
         return redirect()->back()->with('success', 'Profile updated successfully');
     }

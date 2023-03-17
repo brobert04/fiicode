@@ -48,6 +48,10 @@
               </select>
             </div>
             <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter patient phone number">
+            </div>
+            <div class="form-group">
               <label for="start">Start Date&Time</label>
               <input type="text" class="form-control" id="start" name="start" placeholder="Enter start date&time">
             </div>
@@ -116,6 +120,7 @@
                 $('#event_id').val(info.event.id);
                 $('#description').val(event.extendedProps.description);
                 $('#patient').val(event.extendedProps.patient_id);
+                $('#phone').val(event.extendedProps.phone);
                 $('#start').val(event.extendedProps.startDay);
                 $('#end').val(event.extendedProps.endDay);
                 $('#is_all_day').prop('checked', event.allDay);
@@ -175,7 +180,9 @@
             start: $('#start').val(),
             end: $('#end').val(),
             is_all_day: $('#is_all_day').prop('checked') ? 1 : 0,
-            patient_id: $('#patient').val()
+            patient_id: $('#patient').val(),
+            phone: $('#phone').val(),
+
         };
         if(eventId){
             url = '{{url('/doctor')}}' + `/calendar/${eventId}`;

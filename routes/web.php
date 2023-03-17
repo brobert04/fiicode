@@ -63,6 +63,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::post('transfer-patients', [DoctorTransferPatientController::class, 'transferPatients'])->name('doctor.transfer.patients.store');
 
     Route::get('/appointment-requests', [DoctorAppointmentRequestsManagement::class, 'index'])->name('doctor.appointment-requests');
+    Route::put('/appointment-requests/reject/{id}', [DoctorAppointmentRequestsManagement::class, 'rejectAppointment'])->name('doctor.appointment-requests.reject');
+    Route::delete('/appointment-requests/delete/{id}', [DoctorAppointmentRequestsManagement::class, 'destroy'])->name('doctor.appointment-requests.delete');
 
     Route::resource('calendar', DoctorCalendarController::class)->except(['create', 'show', 'edit']);
     Route::get('refetch-appointments', [DoctorCalendarController::class, 'refetchAppointments'])->name('refetch-appointments');

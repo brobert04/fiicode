@@ -45,14 +45,15 @@ class DoctorCalendarController extends Controller
         $data = $request->all();
         $data['doctor_id'] = auth()->user()->doctor->id;
         $reqapp = AppointmentRequest::where('patient_id', $data['patient_id'])->latest()->firstOrFail();
-        $reqapp->status = 'success';
-        $reqapp->save();
+        if($reqapp->exists){
+            $reqapp->status = 'success';
+            $reqapp->save();
+        }
         $appointmentService = new AppointmentService(auth()->user()->doctor);
         $appointment = $appointmentService->create($data);
-        $req = AppointmentRequest::where('patient_id', $data['patient_id'])->latest()->firstOrFail();
-        $receiverNumber = $req->phone;
+        $receiverNumber = $data['phone'];
 
-        $message = 'Hello,' . $req->name . '!'. 'Your next appointment is on '.$data['start'].'. Thank you.';
+        $message = 'Hello' . '!'. " ". 'Your next appointment is on '.$data['start'].'. Thank you for your patience.';
         try {
             $account_sid = getenv("TWILIO_SID");
             $auth_token = getenv("TWILIO_TOKEN");
