@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\AppointmentService;
 use App\Models\Appointment;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateAppointmentRequest;
@@ -126,6 +127,24 @@ class DoctorCalendarController extends Controller
                 'success' => true,
             ]);
         }catch (\Exception $e){
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+    }
+
+    public function resizeEvent(Request $request, $id){
+        $data = $request->all();
+        if(isset($data['is_all_day']) && $data['is_all_day'] == 1){
+            $data['end'] = Carbon::createFromTimestamp(strtotime($data['end']))->addDays(-1)->toDateString();
+        }
+        $appointmentService = new AppointmentService(auth()->user()->doctor);
+        $appointment = $appointmentService->update($id, $data);
+        if($appointment){
+            return response()->json([
+                'success' => true,
+            ]);
+    }else{
             return response()->json([
                 'success' => false,
             ]);

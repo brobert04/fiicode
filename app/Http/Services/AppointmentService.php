@@ -51,7 +51,8 @@ class AppointmentService {
                 $app['startDay'] = $app['start'];
             }else{
                 $app['allDay'] = true;
-                $app['endDay'] = Carbon::createFromTimestamp(strtotime($app['end']))->addDays(-1)->toDateString();
+                $app['endDay'] = Carbon::createFromTimestamp(strtotime($app['end']))->toDateString();
+                $app['end'] = Carbon::createFromTimestamp(strtotime($app['end']))->addDay()->toDateString();
                 $app['startDay'] = $app['start'];
             }
             $app['eventId'] = $app['id'];

@@ -96,6 +96,7 @@
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
             events: '{{route('refetch-appointments')}}',
+            editable:true,
             dateClick: function(info){
               let startDate, endDate, allDay;
               allDay = $('#is_all_day').prop('checked');
@@ -114,6 +115,7 @@
               $('#modal-default').modal('show');
             },
             eventClick: function(info){
+                console.log(info);
                 modalReset();
                 const event = info.event;
                 $('#title').val(info.event.title);
@@ -131,6 +133,14 @@
                 }else{
                     initializeStartDateEndDateFormat("Y-m-d H:i", false);
                 }
+            },
+            eventDrop:function(info){
+                const event = info.event;
+                resizeEventUpdate(event);
+            },
+            eventResize:function(info){
+                const event = info.event;
+                resizeEventUpdate(event);
             }
         });
         calendar.render();
@@ -225,6 +235,45 @@
                   }
               });
           }
+      }
+
+      function resizeEventUpdate(event, eventDrop){
+            let eventId = event.id;
+            let url = '{{url('/doctor')}}' + `/calendar/${eventId}/resize`;
+            let start = null, end=null;
+            if(event.allDay){
+                start = moment(event.start).format('YYYY-MM-DD');
+                end = start;
+                if(event.end){
+                    end=moment(event.end).format('YYYY-MM-DD');
+                }
+            }else{
+                start = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+                end = start;
+                if(event.end){
+                    end=moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
+
+            let postData = {
+                start:start,
+                end:end,
+                is_all_day: event.allDay ? 1 : 0,
+                _method: "PUT"
+            };
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                data: postData,
+                success: function(res){
+                    if(res.success){
+                        calendar.refetchEvents();
+                    }else{
+                        alert('Something went wrong!')
+                    }
+                }
+            });
       }
 </script>
 @endsection

@@ -15,6 +15,10 @@ class DashboardController extends Controller
             return view('doctor.pages.dashboard');
         }
         elseif (auth()->user()->role=="patient") {
+            if(auth()->user()->patient->profile_completed==0){
+                flash('Thank you for registering! Before you begin, please complete your profile.')->warning();
+                return view('patient.pages.dashboard');
+            }
             return view('patient.pages.dashboard');
         }
     }

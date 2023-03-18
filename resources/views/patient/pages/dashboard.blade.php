@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('../assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 @endsection
 @section('content')
+    @include('flash::message')
     <h1>Hello</h1>
 @endsection
 @section('custom-js')

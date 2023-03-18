@@ -67,6 +67,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::delete('/appointment-requests/delete/{id}', [DoctorAppointmentRequestsManagement::class, 'destroy'])->name('doctor.appointment-requests.delete');
 
     Route::resource('calendar', DoctorCalendarController::class)->except(['create', 'show', 'edit']);
+    Route::put('calendar/{id}/resize', [DoctorCalendarController::class, 'resizeEvent'])->name('calendar.resize');
     Route::get('refetch-appointments', [DoctorCalendarController::class, 'refetchAppointments'])->name('refetch-appointments');
 });
 
