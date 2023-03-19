@@ -37,7 +37,6 @@ class DoctorProfileController extends Controller
         $this->validate($request, ['email' => 'unique:users,email,' . auth()->id(),], ['email.unique' => 'This email address has been already been used']);
         $doctor = User::find(auth()->id())->doctor;
         $doctor->specialty = $request->specialty;
-        $doctor->phone = $request->phone;
         $doctor->address = $request->address;
         $doctor->about = $request->about;
         $doctor->company = $request->company;

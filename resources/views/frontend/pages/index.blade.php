@@ -1,5 +1,5 @@
 @extends('frontend.template')
-@section('title', 'Medicool | Home')
+@section('title', 'HealthHub | Home')
 @section('content')
 <!-- ======= Why Us Section ======= -->
 <section id="why-us" class="why-us">
@@ -7,10 +7,9 @@
       <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
           <div class="content">
-            <h3>Why Choose Medilab?</h3>
+            <h3>Why Choose HealthHub?</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                All-in-one solution: HealthHub brings together all aspects of healthcare management, including appointment scheduling, secure messaging, and doctor-patient interaction, into one easy-to-use platform. This means you can manage all of your healthcare needs from everywhere.
             </p>
             <div class="text-center">
               <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
@@ -52,183 +51,194 @@
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
         <div class="container-fluid">
-  
+
           <div class="row">
             <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
               <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
             </div>
-  
+
             <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-              <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-              <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
-  
+              <h3>All your medical needs, in one place</h3>
+              <p>The platform was created to come to the aid of doctors who face patient dissatisfaction caused by too long waiting times. Therefore, here are the main advantages of HealthHUb</p>
+
               <div class="icon-box">
-                <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                <div class="icon"><i class="bx bx-message"></i></div>
+                <h4 class="title"><a href="">Instant Communication</a></h4>
+                <p class="description">Using the built-in live chat, the patient can instantly get in touch with his doctor</p>
               </div>
-  
+
               <div class="icon-box">
-                <div class="icon"><i class="bx bx-gift"></i></div>
-                <h4 class="title"><a href="">Nemo Enim</a></h4>
-                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                <div class="icon"><i class="bx bx-file"></i></div>
+                <h4 class="title"><a href="">Medical history at the patient's fingertips</a></h4>
+                <p class="description">With just a click of a button, the patient can easily see his medical history, without losing time at the medical office</p>
               </div>
-  
+
               <div class="icon-box">
-                <div class="icon"><i class="bx bx-atom"></i></div>
-                <h4 class="title"><a href="">Dine Pad</a></h4>
-                <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
+                <div class="icon"><i class="bx bx-phone"></i></div>
+                <h4 class="title"><a href="">Easy to Make Appointment</a></h4>
+                <p class="description">Instead of waiting for the doctor to answer your calls, you can send a request yourself</p>
               </div>
-  
+                <div class="icon-box">
+                    <div class="icon"><i class="bx bx-map"></i></div>
+                    <h4 class="title"><a href="">Find the nearest medical offices with ease</a></h4>
+                    <p class="description">All medical offices in your area are just a click away</p>
+                </div>
+
             </div>
           </div>
-  
+
         </div>
       </section><!-- End About Section -->
+<!-- ======= Counts Section ======= -->
+<section id="counts" class="counts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <div class="count-box">
+                    <i class="fas fa-user-md"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Doctors</p>
+                </div>
+            </div>
 
-          <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Doctors</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
-  
-          <div class="row">
-  
-            <div class="col-lg-6">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Walter White</h4>
-                  <span>Chief Medical Officer</span>
-                  <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
+            <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+                <div class="count-box">
+                    <i class="far fa-hospital"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Departments</p>
                 </div>
-              </div>
             </div>
-  
-            <div class="col-lg-6 mt-4 mt-lg-0">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Anesthesiologist</span>
-                  <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
+
+            <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                <div class="count-box">
+                    <i class="fas fa-flask"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Research Labs</p>
                 </div>
-              </div>
             </div>
-  
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>William Anderson</h4>
-                  <span>Cardiology</span>
-                  <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
+
+            <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                <div class="count-box">
+                    <i class="fas fa-award"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Awards</p>
                 </div>
-              </div>
             </div>
-  
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Amanda Jepson</h4>
-                  <span>Neurosurgeon</span>
-                  <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
+
         </div>
-      </section><!-- End Doctors Section -->
-         <!-- ======= Testimonials Section ======= -->
-         <section id="testimonials" class="testimonials">
+
+    </div>
+</section>
+<!-- End Counts Section -->
+<!-- ======= Frequently Asked Questions Section ======= -->
+<section id="faq" class="faq section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+            <ul>
+                <li data-aos="fade-up">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">What is HealthHub? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                        <p>
+                            HealthHub is a comprehensive healthcare management platform that helps healthcare providers manage their practice and communicate with their patients more efficiently. Our platform includes features such as appointment scheduling, secure messaging, and online payment, all in one easy-to-use interface.
+                        </p>
+                    </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="100">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Is HealthHub secure? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Yes, we take your privacy and security very seriously at HealthHub. We have implemented robust security features to keep your information safe, and all communication between patients and healthcare providers is encrypted and secure.
+                        </p>
+                    </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="200">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Can HealthHub be customized to fit my specific needs?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Yes, HealthHub is designed to be customizable to fit the unique needs of your healthcare practice. Whether you're a solo practitioner or part of a large medical group, our platform can be tailored to suit your specific requirements.
+                        </p>
+                    </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="300">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">How does HealthHub help improve patient communication? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            HealthHub offers secure messaging features that allow patients to communicate with their healthcare provider in a safe and convenient way. This means that patients can ask questions, request appointments, and receive updates on their health status all through the HealthHub platform. Additionally, our online appointment scheduling feature allows patients to book appointments with ease, which can help improve patient satisfaction and reduce missed appointments.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section><!-- End Frequently Asked Questions Section -->
+
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
             <div class="container">
-      
+
             <div class="section-title">
                     <h2>Testimonials</h2>
             </div>
               <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
-      
+
                   <div class="swiper-slide">
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                        <h3>Saul Goodman</h3>
+                        <h3>{{fake()->name()}}</h3>
                         <h4>Ceo &amp; Founder</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                            I've been using this app for several months now, and it's made a huge difference in the way I manage my patients. The interface is easy to use, and the features are exactly what I need to stay organized and communicate with my patients more efficiently.
                           <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                       </div>
                     </div>
                   </div><!-- End testimonial item -->
-      
+
                   <div class="swiper-slide">
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                        <h3>Sara Wilsson</h3>
-                        <h4>Designer</h4>
+                          <h3>{{fake()->name()}}</h3>                        <h4>Designer</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                            I highly recommend this app to any medical professional looking for an all-in-one solution for managing their practice. The appointment scheduling and online payment features have made my life so much easier, and my patients love the convenience of being able to communicate with me securely through the app.
                           <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                       </div>
                     </div>
                   </div><!-- End testimonial item -->
-      
+
                   <div class="swiper-slide">
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                        <h3>Jena Karlis</h3>
+                          <h3>{{fake()->name()}}</h3>
                         <h4>Store Owner</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                            As a busy physician with a large patient load, I was looking for a way to streamline my practice and reduce the amount of time I spent on administrative tasks. This app has been a game-changer for me. It's user-friendly and customizable, and the customer support team is top-notch.
                           <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                       </div>
                     </div>
                   </div><!-- End testimonial item -->
-      
+
                   <div class="swiper-slide">
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                        <h3>Matt Brandon</h3>
+                          <h3>{{fake()->name()}}</h3>
                         <h4>Freelancer</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -238,26 +248,26 @@
                       </div>
                     </div>
                   </div><!-- End testimonial item -->
-      
+
                   <div class="swiper-slide">
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                        <h3>John Larson</h3>
+                          <h3>{{fake()->name()}}</h3>
                         <h4>Entrepreneur</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                          Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                            I was hesitant to try yet another app for managing my practice, but I'm so glad I gave this one a chance. The secure messaging feature has been especially useful for communicating with patients during the pandemic, and the appointment reminders have reduced the number of no-shows at my office
                           <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                       </div>
                     </div>
                   </div><!-- End testimonial item -->
-      
+
                 </div>
                 <div class="swiper-pagination"></div>
               </div>
-      
+
             </div>
           </section><!-- End Testimonials Section -->
 @endsection

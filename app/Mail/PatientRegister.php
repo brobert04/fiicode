@@ -39,7 +39,7 @@ class PatientRegister extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'doctor.mail',
+            markdown: 'doctor.mail',
         );
     }
 

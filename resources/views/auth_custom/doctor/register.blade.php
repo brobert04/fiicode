@@ -1,11 +1,11 @@
-@section('title', 'Medicool | Doctor Register')
+@section('title', 'HealthHub | Doctor Register')
     <!DOCTYPE html>
 <html lang="en">
 @include('auth_custom.partials.head')
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href=""><b>Medi</b>Cool</a>
+        <a href=""><b>Health</b>Hub</a>
     </div>
 
     <div class="card">

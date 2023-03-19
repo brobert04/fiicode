@@ -5,7 +5,6 @@
 @endsection
 @section('content')
     @include('flash::message')
-    <h2>Hello</h2>
 @endsection
 @section('custom-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

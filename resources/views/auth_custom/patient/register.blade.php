@@ -1,11 +1,11 @@
-@section('title', 'Medicool | Doctor Register')
+@section('title', 'HealthHub | Doctor Register')
 <!DOCTYPE html>
 <html lang="en">
 @include('auth_custom.partials.head')
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href=""><b>Medi</b>Cool</a>
+        <a href=""><b>Health</b>Hub</a>
     </div>
 
     <div class="card">
@@ -46,45 +46,6 @@
                         <select class="form-control" name="role_id" id="role_id" hidden>
                             <option value="patient" selected>Patient</option>
                         </select>
-                </div>
-                <div class="form-group mb-3">
-                    <div class="card card-primary collapsed-card">
-                        <div class="card-header">
-                            <h3 class="card-title">More Information</h3>
-                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body" style="display: none;">
-                            <div class="form-group mb-3">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" placeholder="Phone number" id="phone"
-                                       name="phone" required>
-                                @error('phone') <span class="text-danger small">{{$message}}</span>@enderror
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" placeholder="Enter address" id="address"
-                                       name="address" required>
-                                @error('address') <span class="text-danger small">{{$message}}</span>@enderror
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender" id="gender">
-                                        <option value="male" selected>Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                        <label for="date">Birthday Date</label>
-                                        <input type="date" class="form-control" name="date" id="date">
-                                      </div>
-                                      @error('date')
-                                      <span class="text-danger">{{$message}}</span>
-                                      @enderror
-                        </div>
-                    </div>
                 </div>
                 <div class="preview-image" id="preview-image">
                 </div>

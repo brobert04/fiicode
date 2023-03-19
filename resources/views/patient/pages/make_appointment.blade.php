@@ -1,4 +1,5 @@
 @extends('patient.template')
+@section('title', 'HealthHub | Make Appointment')
 @section('custom-css')
 @endsection
 @section('content')
@@ -15,19 +16,22 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="name">On what name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+                    <input type="text" class="form-control" placeholder="Enter name" value="{{auth()->user()->name}}" disabled>
+                    <input type="hidden" value="{{auth()->user()->name}}" id="name" name="name">
                   </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" placeholder="Enter email" value="{{auth()->user()->email}}" disabled>
+                    <input type="hidden" value="{{auth()->user()->email}}" id="email" name="email">
                   </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+                    <input type="text" class="form-control" placeholder="Enter phone number" value="{{auth()->user()->patient->phone}}" disabled>
+                    <input type="hidden" value="{{auth()->user()->patient->phone}}" id="phone" name="phone">
                   </div>
             </div>
         </div>

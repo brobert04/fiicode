@@ -45,8 +45,12 @@ class DoctorCalendarController extends Controller
     {
         $data = $request->all();
         $data['doctor_id'] = auth()->user()->doctor->id;
-        $reqapp = AppointmentRequest::where('patient_id', $data['patient_id'])->latest()->firstOrFail();
-        if($reqapp->exists){
+        $reqapp = AppointmentRequest::where('patient_id', $data['patient_id'])->latest()->first();
+//        if($reqapp->isNotEmpty()){
+//                $reqapp->status = 'success';
+//                $reqapp->save();
+//        }
+        if($reqapp){
             $reqapp->status = 'success';
             $reqapp->save();
         }

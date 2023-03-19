@@ -96,6 +96,10 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patie
 
     Route::get('/request-appointment', [PatientController::class, 'appointmentIndex'])->name('patient.make-appointment');
     Route::post('/request-appointment', [PatientController::class, 'appointmentSave'])->name('patient.make-appointment.save');
+
+    Route::get('/profile', [\App\Http\Controllers\PatientProfileController::class, 'index'])->name('patient.profile');
+    Route::post('/profile', [\App\Http\Controllers\PatientProfileController::class, 'update'])->name('patient.profile.update');
+    Route::put('/profile/password', [\App\Http\Controllers\PatientProfileController::class, 'resetPassword'])->name('patient.profile.password');
 });
 
 Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('patient.register')->middleware('guest', 'hasInvitation');

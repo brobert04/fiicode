@@ -23,7 +23,7 @@
                 Map
               </p>
             </a>
-          </li>     
+          </li>
           <li class="nav-header">MEDICAL MANAGEMENT</li>
           <li class="nav-item">
             <a href="{{ route('patient.my-doctor') }}" class="nav-link">
@@ -52,7 +52,7 @@
           </li>
           <li class="nav-header">SETTINGS</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('patient.profile')}}" class="nav-link">
               <i class="nav-icon fas fa-pen"></i>
               <p>
                 Edit Profile
