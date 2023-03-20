@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentRequest;
+use App\Models\Doctor;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -24,4 +26,16 @@ class PatientController extends Controller
         $app->save();
         return redirect()->back()->with('success', 'Appointment Request Sent Successfully');
     }
+
+    public function doctorMap(){
+//        $doctors = Doctor::all();
+//        foreach ($doctors as $doc){
+//            $location = $doc->location;
+////            dd($location);
+////            echo '<p>' . json_encode($location) . '</p>';
+//        }
+        $location = Location::all();
+        return view('patient.pages.doctor-map', compact('location'));
+    }
 }
+

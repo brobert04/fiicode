@@ -4,10 +4,10 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-sm-inline-block">
         <a href="{{ route('index') }}" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item  d-sm-inline-block">
         <form action={{ route('logout') }} method="POST">
           @csrf
           <a onclick="event.preventDefault();$(this).closest('form').submit();" class="nav-link text-danger">Logout</a>

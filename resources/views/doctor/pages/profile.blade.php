@@ -241,26 +241,32 @@
                       </div>
                     </div>
 
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control @error('country') is-invalid @enderror" id="Country" value="{{ auth()->user()->doctor->country }}">
-                        @error('country')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                      </div>
-                    </div>
+{{--                    <div class="row mb-3">--}}
+{{--                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>--}}
+{{--                      <div class="col-md-8 col-lg-9">--}}
+{{--                        <input name="country" type="text" class="form-control @error('country') is-invalid @enderror" id="Country" value="{{ auth()->user()->doctor->country }}">--}}
+{{--                        @error('country')--}}
+{{--                        <span class="text-danger">{{$message}}</span>--}}
+{{--                        @enderror--}}
+{{--                      </div>--}}
+{{--                    </div>--}}
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" id="Address" value="{{ auth()->user()->doctor->address }}">
+                        <input name="address_address" type="text" class="form-control map-input @error('address') is-invalid @enderror" id="address-input" value="{{ auth()->user()->doctor->address }}">
+                          <input type="hidden" name="address_latitude" id="address-latitude" value="0" />
+                          <input type="hidden" name="address_longitude" id="address-longitude" value="0" />
                         @error('address')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                       </div>
                     </div>
-
+                      <div class="row mb-3">
+                          <div id="address-map-container" style="width:100%;height:300px;" class="card mt-3">
+                              <div style="width: 100%; height: 100%" id="address-map"></div>
+                          </div>
+                      </div>
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
@@ -500,4 +506,6 @@
     }
   }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+<script src="{{asset('../js/mapInput.js')}}"></script>
 @endsection

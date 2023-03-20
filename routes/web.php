@@ -100,6 +100,8 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patie
     Route::get('/profile', [\App\Http\Controllers\PatientProfileController::class, 'index'])->name('patient.profile');
     Route::post('/profile', [\App\Http\Controllers\PatientProfileController::class, 'update'])->name('patient.profile.update');
     Route::put('/profile/password', [\App\Http\Controllers\PatientProfileController::class, 'resetPassword'])->name('patient.profile.password');
+
+    Route::get('map', [PatientController::class, 'doctorMap'])->name('patient.map');
 });
 
 Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('patient.register')->middleware('guest', 'hasInvitation');

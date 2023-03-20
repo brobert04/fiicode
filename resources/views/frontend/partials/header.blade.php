@@ -16,9 +16,9 @@
 
       @if(Route::has('login'))
         @auth
-          <a href="{{ route('dashboard') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Dashboard</a>
+          <a href="{{ route('dashboard') }}" class="appointment-btn scrollto"><span class="d d-md-inline">Dashboard</a>
         @else
-          <a href="{{ route('login') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</a>
+          <a href="{{ route('login') }}" class="appointment-btn scrollto"><span class="d d-md-inline">Login</a>
         @endauth
       @endif
     </div>

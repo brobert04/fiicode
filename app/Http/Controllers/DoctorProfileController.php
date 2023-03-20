@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBusinessHoursRequest;
 use App\Models\DoctorHours;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +38,25 @@ class DoctorProfileController extends Controller
         $this->validate($request, ['email' => 'unique:users,email,' . auth()->id(),], ['email.unique' => 'This email address has been already been used']);
         $doctor = User::find(auth()->id())->doctor;
         $doctor->specialty = $request->specialty;
-        $doctor->address = $request->address;
+        $doctor->address = $request->address_address;
+        if(Location::where('doctor_id', $doctor->id)->exists()){
+            $location = Location::where('doctor_id', $doctor->id)->first();
+            $location->lat = $request->address_latitude;
+            $location->lng = $request->address_longitude;
+            $location->name = $request->address_address;
+            $location->save();
+        }
+        else{
+            $location = new Location();
+            $location->lat = $request->address_latitude;
+            $location->lng = $request->address_longitude;
+            $location->name = $request->address_address;
+            $location->doctor_id = $doctor->id;
+            $location->save();
+        }
         $doctor->about = $request->about;
         $doctor->company = $request->company;
-        $doctor->country = $request->country;
+//        $doctor->country = $request->country;
         $doctor->phone = $request->phone;
         $doctor->bod = $request->date;
         $doctor->gender = $request->gender;
