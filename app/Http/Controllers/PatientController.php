@@ -28,14 +28,31 @@ class PatientController extends Controller
     }
 
     public function doctorMap(){
-//        $doctors = Doctor::all();
-//        foreach ($doctors as $doc){
-//            $location = $doc->location;
-////            dd($location);
-////            echo '<p>' . json_encode($location) . '</p>';
-//        }
-        $location = Location::all();
-        return view('patient.pages.doctor-map', compact('location'));
+         $doctors = Doctor::with('location')->get();
+
+         // Initialize an empty array to store the locations
+         $locations = [];
+ 
+         // Loop through the doctors and retrieve their locations
+         foreach ($doctors as $doctor) {
+             $location = $doctor->location;
+             if ($location) {
+                 // Add the location to the array if it exists
+                 $locations[] = [
+                     'name' => $location->name,
+                     'lat' => $location->lat,
+                     'lng' => $location->lng,
+                     'company' => $doctor->company,
+                     'doc_name' => $doctor->user->name,
+                     'phone' => $doctor->phone,
+                     'patients' => $doctor->patients->count(),
+                     'hours' => $doctor->doctorHours,
+                     'id' => $doctor->id,
+                 ];
+             }
+         }
+        //  dd($locations["lat"]);
+        return view('patient.pages.doctor-map', compact('locations'));
     }
 }
 

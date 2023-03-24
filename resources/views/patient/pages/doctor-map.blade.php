@@ -1,36 +1,47 @@
 @extends('patient.template')
 @section('title', 'Doctor Map');
 @section('content')
-    <div id="map" style="height:400px;"></div>
+    <div class="card">
+        <div id="map" style="height:400px;"></div>
+    </div>
 @endsection
 @section('custom-js')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     <script>
         function initMap() {
-            var lat = 23.8103;
-            var lng = 90.4125;
+            var lat = 47.17414872893469;
+            var lng = 27.57498574247874;
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: lat, lng: lng },
-                zoom: 6,
+                zoom: 10,
             });
-
-  
-            var locations =  <?php print_r(json_encode($location)) ?>;
+    
+            var locations =  <?php print_r(json_encode($locations)) ?>;
   
             let infowindow = new google.maps.InfoWindow();
             let window = new google.maps.InfoWindow();
-
             var marker, i;
               
             for (i = 0; i < locations.length; i++) {  
+                const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
                   marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
-                    map: map
+                    map: map,
+                    icon: image,
                   });
                     
                   google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                      infowindow.setContent(locations[i]['name']);
+                      infowindow.setContent(
+                        `<span style="color:red; font-weight:bold; font-size:15px;">Dr. ${locations[i]['doc_name']}</span>` + 
+                        '<br>' +
+                        `<span">${locations[i]['name']}</span>` + 
+                        '<br>' +
+                        `<span style="font-size:12px;"><a href="tel:${locations[i]['phone']}">${locations[i]['phone']}</a></span>` + 
+                        '<br>' +
+                        `<span style="font-size:12px;">No. of patients : ${locations[i]['patients']}</span>` + 
+                        '<br>' +
+                        '<a style="margin-top:5px;" href="{{ url('/chat') }}">Chat With Him</a>');
                       infowindow.open(map, marker);
                     }
                   })(marker, i));
@@ -55,6 +66,7 @@
                             window.setContent("Location found.");
                             window.open(map);
                             map.setCenter(pos);
+                            map.setZoom(15);
                         },
                         () => {
                             handleLocationError(true, window, map.getCenter());

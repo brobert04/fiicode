@@ -33,6 +33,9 @@
         <div class="card card-dark">
             <div class="card-header">
                 <h3 class="card-title">Invites Sent</h3>
+                <div class="card-tools">
+                    {{ $invitations->links() }}
+                </div>
             </div>  
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">

@@ -21,6 +21,9 @@
               <img src="https://ui-avatars.com/api/?name={{ auth()->user()->patient->doctor->user->name }}&background=random&size=128"" alt="Profile" class="rounded-circle">
               <h3 class="mt-3">{{ $doctor->user->name }}</h3>
               <p class="text-muted">{{ $doctor->specialty }}</p>
+              <a class="btn btn-secondary mb-3" href="{{ url('/chat') . '/' . $doctor->user->id  }}">
+                <i class="fas fa-comment"></i> Chat with him
+                </a>
               @empty($hours)
               @else
               <div class="btn-group">

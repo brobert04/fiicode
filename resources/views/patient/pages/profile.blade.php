@@ -19,14 +19,6 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random&size=128"" alt="Profile" class="rounded-circle">
               <h3 class="mt-3">{{ auth()->user()->name }}</h3>
-{{--              <p class="text-muted">{{ auth()->user()->doctor->specialty }}</p>--}}
-              {{-- <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div> --}}
-              <hr width="350px">
           </div>
         </div>
         </div>

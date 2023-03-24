@@ -17,7 +17,7 @@ class DoctorSendInviteController extends Controller
     }
 
     public function sendInvite(){
-        $invitations =  Invitation::where('doctor_email', auth()->user()->email)->get(); 
+        $invitations =  Invitation::where('doctor_email', auth()->user()->email)->paginate(5); 
         // dd($invitations);  
         return view('doctor.pages.send_invitation', compact('invitations'));
     }

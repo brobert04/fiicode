@@ -1,4 +1,4 @@
-@section('title', 'HealthHub | Doctor Register')
+@section('title', 'HealthHub | Patient Register')
 <!DOCTYPE html>
 <html lang="en">
 @include('auth_custom.partials.head')
