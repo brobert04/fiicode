@@ -43,18 +43,18 @@
           </li>
           <li class="nav-header">CALENDAR</li>
           <li class="nav-item">
-            <a href="{{route('calendar.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-calendar"></i>
-              <p>
-                  Calendar
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{route('doctor.appointment-requests')}}" class="nav-link">
               <i class="nav-icon fas fa-list"></i>
               <p>
                   Appointment Requests
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('calendar.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>
+                  Schedule Appointments
               </p>
             </a>
           </li>

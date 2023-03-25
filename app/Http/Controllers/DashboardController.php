@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +13,8 @@ class DashboardController extends Controller
                 flash('Thank you for registering! Before you begin, please complete your profile.')->warning();
                 return view('doctor.pages.dashboard');
             }
-            return view('doctor.pages.dashboard');
+            $todos = Todo::where('doctor_id', auth()->user()->doctor->id)->get();
+            return view('doctor.pages.dashboard', compact('todos'));
         }
         elseif (auth()->user()->role=="patient") {
             if(auth()->user()->patient->profile_completed==0){

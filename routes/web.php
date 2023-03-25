@@ -13,6 +13,7 @@ use App\Http\Controllers\DoctorTransferPatientController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorAppointmentRequestsManagement;
 use App\Http\Controllers\DoctorCalendarController;
+use App\Http\Controllers\TodoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified', 'doctor
     Route::resource('calendar', DoctorCalendarController::class)->except(['create', 'show', 'edit']);
     Route::put('calendar/{id}/resize', [DoctorCalendarController::class, 'resizeEvent'])->name('calendar.resize');
     Route::get('refetch-appointments', [DoctorCalendarController::class, 'refetchAppointments'])->name('refetch-appointments');
+
+    Route::resource('todo', TodoController::class)->except(['index', 'create', 'show', 'edit']);
 });
 
 Route::group(['prefix' => 'patient', 'middleware' => ['auth', 'verified', 'patient']], function(){

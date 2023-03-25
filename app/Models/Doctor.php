@@ -33,4 +33,8 @@ class Doctor extends Model
     public function location(){
         return $this->hasOne(Location::class);
     }
+
+    public function todos(){
+        return $this->hasMany(Todo::class);
+    }
 }
