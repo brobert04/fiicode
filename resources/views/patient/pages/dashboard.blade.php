@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     @include('flash::message')
-    <h1>Hello</h1>
+    <h1 class="text-bold">Hello, {{ auth()->user()->name }}! 👀</h1>
 @endsection
 @section('custom-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
