@@ -72,6 +72,8 @@
                 <div class="row" style="clear: both;margin-top: 18px;">
                   <div class="col-12">
                   <ul class="todo-list" data-widget="todo-list" id="todo-list">
+                    @empty($invitations)
+                    @else
                     @foreach ($todos as $todo )
                     <li id="todo_{{ $todo->id }}">
                       <!-- drag handle -->
@@ -90,6 +92,7 @@
                       </div>
                     </li>
                     @endforeach
+                    @endempty
                   </ul>
               </div>
               </div>

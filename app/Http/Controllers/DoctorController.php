@@ -22,11 +22,11 @@ class DoctorController extends Controller
     }
 
     public function patients(){
-        if (request('patient')){
-            $patient = Patient::where('id', request('patient'))->firstOrFail();
-            $apppointment = Appointment::where('patient_id', request('patient'))->latest()->firstOrFail();
+
+        if(request('patient')){
+            $patient = Patient::where('id', request('patient'))->first();
             $health = HealthFile::where('patient_id', request('patient'))->get();
-            return view('doctor.pages.patient_history')->with(['patient' => $patient, 'health' => $health, 'apppointment' => $apppointment]);
+            return view('doctor.pages.patient_history')->with(['patient' => $patient, 'health' => $health]);
         }
         $patients = Auth::user()->doctor->patients;
         return view('doctor.pages.all_patients', compact('patients'));

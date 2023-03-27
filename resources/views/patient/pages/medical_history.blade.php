@@ -10,9 +10,8 @@
       <table class="table table-hover text-nowrap">
         <thead>
           <tr>
-            <th>Reason/Symptoms</th>
+            <th>Reason for seeing the doctor</th>
             <th>Date</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -22,11 +21,6 @@
             <td>
                 {{ \Carbon\Carbon::parse($h->date)->format('d/m/Y') }}
             </td>
-            {{-- <td>
-                <a href="{{ route('doctor.health-file.profile', $h->date) }}" class="btn btn-primary text-white" title="See health-file" target="_blank">
-                    <i class="fas fa-eye"></i>
-                  </a>
-            </td> --}}
           </tr>
           @endforeach
         </tbody>

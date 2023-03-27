@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('specialty')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('about')->nullable();
+            $table->text('about')->nullable();
             $table->string('company')->nullable();
             $table->string('country')->nullable();
             $table->date('bod')->nullable();

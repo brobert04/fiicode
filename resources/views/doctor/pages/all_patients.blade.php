@@ -23,7 +23,7 @@
         @foreach ($patients as $patient )
         <tr>
           <td>
-            <a href="{{ route('doctor.patients', ['patient' => $patient->id]) }}">{{ $patient->user->name }}</a></td>
+            <a href="{{ route('doctor.patients',['patient' => $patient->id]) }}">{{ $patient->user->name }}</a></td>
           <td>{{ $patient->user->email }}</td>
           <td>{{ $patient->phone }}</td>
           <td>{{ $patient->address }}</td>

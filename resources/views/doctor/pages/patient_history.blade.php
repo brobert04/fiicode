@@ -18,9 +18,14 @@
         <li class="list-group-item">
           <b>Health Reports</b> <a class="float-right">{{ $health->count() }}</a>
         </li>
+        @if($patient->appointments->count() > 0)
         <li class="list-group-item">
-          <b>Next Appointment</b><a class="float-right">{{ \Carbon\Carbon::parse($apppointment->start)->format('d/m/Y') }}</a>
+          <?php
+            $last = $patient->appointments()->latest()->select('start')->first()
+          ?>
+          <b>Next Appointment</b><a class="float-right">{{ \Carbon\Carbon::parse($last->start)->format('d/m/Y') }}</a>
         </li>
+        @endif
       </ul>
 
       <a href="#" class="btn btn-primary btn-block" id="show"><b>See History</b></a>

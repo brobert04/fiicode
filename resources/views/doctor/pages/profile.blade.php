@@ -155,14 +155,6 @@
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">Job</div>
                     <div class="col-lg-9 col-md-8">{{ auth()->user()->doctor->specialty }}</div>
                   </div>
-
-                  <div class="row  mb-2">
-                    <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6);font-size:18px;">Country</div>
-                    <div class="col-lg-9 col-md-8">
-                      {{ auth()->user()->doctor->country }}
-                    </div>
-                  </div>
-
                   <div class="row  mb-2">
                     <div class="col-lg-3 col-md-4 label" style="color:rgba(1, 41, 112, 0.6); font-size:18px;">Address</div>
                     <div class="col-lg-9 col-md-8">{{ auth()->user()->doctor->address }}</div>

@@ -15,6 +15,7 @@ class DashboardController extends Controller
             }
             $todos = Todo::where('doctor_id', auth()->user()->doctor->id)->get();
             return view('doctor.pages.dashboard', compact('todos'));
+
         }
         elseif (auth()->user()->role=="patient") {
             if(auth()->user()->patient->profile_completed==0){
