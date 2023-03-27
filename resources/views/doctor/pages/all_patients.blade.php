@@ -25,9 +25,27 @@
           <td>
             <a href="{{ route('doctor.patients',['patient' => $patient->id]) }}">{{ $patient->user->name }}</a></td>
           <td>{{ $patient->user->email }}</td>
-          <td>{{ $patient->phone }}</td>
-          <td>{{ $patient->address }}</td>
-          <td>{{ $patient->bod }}</td>
+          <td>
+            @empty($patient->phone)
+            <span class="text-danger" style="font-style: italic">Waiting for profile completion..</span>
+            @else
+            {{ $patient->phone }}
+            @endempty
+          </td>
+          <td>
+            @empty($patient->address)
+            <span class="text-danger" style="font-style: italic">Waiting for profile completion..</span>
+            @else
+            {{ $patient->address }}
+            @endempty
+          </td>
+          <td>
+            @empty($patient->bod)
+            <span class="text-danger" style="font-style: italic">Waiting for profile completion..</span>
+            @else
+            {{ $patient->bod }}
+            @endempty
+            </td>
           <td>
             <img src="https://ui-avatars.com/api/?name={{ $patient->user->name }}&background=random&size=128" alt="{{ $patient->user->name }} Avatar" class="img-size-50 mr-3">
           </td>
