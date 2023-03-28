@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Patient;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
