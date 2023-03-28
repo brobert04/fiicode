@@ -25,7 +25,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
-    
+        $this->app->bind('path.public', function() {
+            return base_path().'/../public_html';
+        });
+
     }
 }
     
