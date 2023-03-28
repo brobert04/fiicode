@@ -96,7 +96,7 @@
             <div class="col-lg-3 col-md-12">
                 <div class="count-box">
                     <i class="fas fa-user-md"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Doctors</p>
                 </div>
             </div>
@@ -104,7 +104,7 @@
             <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
                 <div class="count-box">
                     <i class="far fa-hospital"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Departments</p>
                 </div>
             </div>
@@ -112,7 +112,7 @@
             <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                 <div class="count-box">
                     <i class="fas fa-flask"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Research Labs</p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
             <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                 <div class="count-box">
                     <i class="fas fa-award"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="{{fake()->numberBetween(100, 2000)}}" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Awards</p>
                 </div>
             </div>
@@ -194,7 +194,7 @@
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                        <h3>{{fake()->name()}}</h3>
+                        <h3>Matthew</h3>
                         <h4>Ceo &amp; Founder</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -209,7 +209,7 @@
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                          <h3>{{fake()->name()}}</h3>                        <h4>Designer</h4>
+                          <h3>Andrew</h3>                        <h4>Designer</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                             I highly recommend this app to any medical professional looking for an all-in-one solution for managing their practice. The appointment scheduling and online payment features have made my life so much easier, and my patients love the convenience of being able to communicate with me securely through the app.
@@ -223,7 +223,7 @@
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                          <h3>{{fake()->name()}}</h3>
+                          <h3>Apie</h3>
                         <h4>Store Owner</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -238,7 +238,7 @@
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                          <h3>{{fake()->name()}}</h3>
+                          <h3>Copperfield</h3>
                         <h4>Freelancer</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -253,7 +253,7 @@
                     <div class="testimonial-wrap">
                       <div class="testimonial-item">
                         <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                          <h3>{{fake()->name()}}</h3>
+                          <h3>Musk</h3>
                         <h4>Entrepreneur</h4>
                         <p>
                           <i class="bx bxs-quote-alt-left quote-icon-left"></i>
