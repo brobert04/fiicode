@@ -10,8 +10,9 @@ class DashboardController extends Controller
     public function index(){
         if (auth()->user()->role=="doctor"){
             if(auth()->user()->doctor->profile_completed==0){
+                $todos = Todo::where('doctor_id', auth()->user()->doctor->id)->get();
                 flash('Thank you for registering! Before you begin, please complete your profile.')->warning();
-                return view('doctor.pages.dashboard');
+                return view('doctor.pages.dashboard', compact('todos'));
             }
             $todos = Todo::where('doctor_id', auth()->user()->doctor->id)->get();
             return view('doctor.pages.dashboard', compact('todos'));

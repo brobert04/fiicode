@@ -2,18 +2,18 @@
 @section('title', 'Doctor Map');
 @section('content')
     <div class="card">
-        <div id="map" style="height:400px;"></div>
+        <div id="map" style="height:700px;"></div>
     </div>
 @endsection
 @section('custom-js')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" async defer></script>
     <script>
         function initMap() {
-            var lat = 47.17414872893469;
-            var lng = 27.57498574247874;
+            var lat = 46.70624451427844;
+            var lng = 1.5450684330912021;
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: lat, lng: lng },
-                zoom: 10,
+                zoom: 13
             });
     
             var locations =  <?php print_r(json_encode($locations)) ?>;

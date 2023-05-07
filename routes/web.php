@@ -14,6 +14,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorAppointmentRequestsManagement;
 use App\Http\Controllers\DoctorCalendarController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ChatBotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,8 +116,7 @@ Route::get('/patient/register', [PatientRegistration::class, 'create'])->name('p
 Route::post('/patient/register', [PatientRegistration::class, 'store'])->name('patient.register.store');
 
 
-// Route::middleware('auth')->group(function () {
+Route::post('send-chat', [ChatBotController::class, 'sendChat'])->name('send-chat');
 
-// });
 
 require __DIR__.'/auth.php';

@@ -72,7 +72,7 @@
                 <div class="row" style="clear: both;margin-top: 18px;">
                   <div class="col-12">
                   <ul class="todo-list" data-widget="todo-list" id="todo-list">
-                    @empty($invitations)
+                    @empty($todos)
                     @else
                     @foreach ($todos as $todo )
                     <li id="todo_{{ $todo->id }}">
@@ -147,52 +147,6 @@
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
             events: '{{route('refetch-appointments')}}',
-            editable:true,
-            // dateClick: function(info){
-            //   let startDate, endDate, allDay;
-            //   allDay = $('#is_all_day').prop('checked');
-            //   if(allDay){
-            //       startDate = moment(info.date).format("YYYY-MM-DD");
-            //       endDate = moment(info.date).format("YYYY-MM-DD");
-            //       initializeStartDateEndDateFormat('Y-m-d', true);
-            //   }else{
-            //     initializeStartDateEndDateFormat("Y-m-d H:i", false);
-            //     startDate = moment(info.date).format("YYYY-MM-DD HH:mm:ss");
-            //     endDate = moment(info.date).add(30, 'minutes').format("YYYY-MM-DD HH:mm:ss");
-            //   }
-            //   $('#start').val(startDate);
-            //   $('#end').val(endDate);
-            //   modalReset();
-            //   $('#modal-default').modal('show');
-            // },
-            // eventClick: function(info){
-            //     console.log(info);
-            //     modalReset();
-            //     const event = info.event;
-            //     $('#title').val(info.event.title);
-            //     $('#event_id').val(info.event.id);
-            //     $('#description').val(event.extendedProps.description);
-            //     $('#patient').val(event.extendedProps.patient_id);
-            //     $('#phone').val(event.extendedProps.phone);
-            //     $('#start').val(event.extendedProps.startDay);
-            //     $('#end').val(event.extendedProps.endDay);
-            //     $('#is_all_day').prop('checked', event.allDay);
-            //     $('#modal-default').modal('show');
-            //     $('#deleteEventBtn').show();
-            //     if(info.event.allDay){
-            //         initializeStartDateEndDateFormat("Y-m-d", true);
-            //     }else{
-            //         initializeStartDateEndDateFormat("Y-m-d H:i", false);
-            //     }
-            // },
-            // eventDrop:function(info){
-            //     const event = info.event;
-            //     resizeEventUpdate(event);
-            // },
-            // eventResize:function(info){
-            //     const event = info.event;
-            //     resizeEventUpdate(event);
-            // }
         });
         calendar.render();
         $('#is_all_day').change(function(){

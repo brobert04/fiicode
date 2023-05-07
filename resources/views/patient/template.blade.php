@@ -32,6 +32,27 @@
     <section class="content">
       <div class="container-fluid">
         @yield('content')
+        <div class="floating-chat">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          <div class="chat">
+              <div class="header">
+          <span class="title">
+              Optiwork Chatbot
+          </span>
+                  <button>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+
+              </div>
+              <ul class="messages">
+                  <li class="other">Hello, {{auth()->user()->name}}. How can I help you today?</li>
+              </ul>
+              <div class="footer">
+                  <div class="text-box" contenteditable="true" disabled="true" ></div>
+                  <button id="sendMessage">send</button>
+              </div>
+          </div>
+      </div>
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

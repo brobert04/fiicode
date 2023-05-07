@@ -17,6 +17,7 @@
         "mpdf/mpdf": "^8.0",
         "munafio/chatify": "^1.6",
         "niklasravnsborg/laravel-pdf": "^4.1",
+        "openai-php/laravel": "^0.4.1",
         "twilio/sdk": "^7.0",
         "vonage/client": "^4.0"
     },
