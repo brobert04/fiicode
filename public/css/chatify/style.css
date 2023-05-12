@@ -7,13 +7,6 @@ body {
 }
 
 :root {
-  /*
-    * --------------------------------------------------
-    * NOTE: `--primary-color` variable set in
-    *       `headLinks.blade.php` view file.
-    * --------------------------------------------------
-    */
-
   /* General variables */
   --icon-size: 20px;
   --headers-padding: 1rem;
